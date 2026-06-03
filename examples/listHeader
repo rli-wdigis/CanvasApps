@@ -1,0 +1,45 @@
+$"
+<table style='table-layout: fixed; width: 100%; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; font-family: Segoe UI, sans-serif; border: 0;'>
+  <colgroup>
+    <!-- R1: ID --> <col style='width: 3%'>
+    <!-- R2: Status --> <col style='width: 8%'>
+    <!-- R3: Employee --> <col style='width: 8%'>
+    <!-- R4: Submitted By --> <col style='width: 7%'>
+    <!-- R5: Course Name --> <col style='width: 12%'>
+    <!-- R6: Location --> <col style='width: 8%'>
+    <!-- R7: Agency --> <col style='width: 8%'>
+    <!-- R8: Start Date --> <col style='width: 5%'>
+    <!-- R9: End Date --> <col style='width: 5%'>
+    <!-- R10: Days --> <col style='width: 4%'>
+    <!-- R11: Type --> <col style='width: 5%'>
+    <!-- R12: Reg Fees --> <col style='width: 6%'>
+    <!-- R13: Supervisor --> <col style='width: 7%'>
+    <!-- R14: Out of State --> <col style='width: 3%'>
+    <!-- R15: Mandatory --> <col style='width: 3%'>
+    <!-- R16: Request Date --> <col style='width: 5%'>
+    <!-- R17: Created By --> <col style='width: 7%'>
+    <!-- R18: Modified Date --> <col style='width: 5%'>
+    <!-- R19: Modified By --> <col style='width: 7%'>
+  </colgroup>
+  <tr style='border: 0;'>
+    <!-- R1: ID --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>ID</th>
+    <!-- R2: Status --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Status</th>
+    <!-- R3: Employee --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Employee</th>
+    <!-- R4: Submitted By --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Submitted By</th>
+    <!-- R5: Course Name --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Course Name</th>
+    <!-- R6: Location --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Location</th>
+    <!-- R7: Agency --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Agency</th>
+    <!-- R8: Start Date --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Start Date</th>
+    <!-- R9: End Date --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>End Date</th>
+    <!-- R10: Days --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Days</th>
+    <!-- R11: Type --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Type</th>
+    <!-- R12: Reg Fees --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Reg Fees</th>
+    <!-- R13: Supervisor --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Supervisor</th>
+    <!-- R14: Out of State --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>OOS</th>
+    <!-- R15: Mandatory --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Mand</th>
+    <!-- R16: Request Date --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Requested</th>
+    <!-- R17: Created By --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Created By</th>
+    <!-- R18: Modified Date --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Modified</th>
+    <!-- R19: Modified By --> <th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 8px; text-align: center; vertical-align: middle; font-size: 11px;'>Modified By</th>
+  </tr>
+</table>"
