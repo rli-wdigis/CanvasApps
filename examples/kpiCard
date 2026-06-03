@@ -1,0 +1,346 @@
+$"
+<div style='font-family:Segoe UI,-apple-system,sans-serif;padding:0;margin:0;width:100%;box-sizing:border-box;background:#ffffff;'>
+
+
+  <!-- ═══ HEADER ═══ -->
+  <div style='padding:14px 20px 8px 20px;box-sizing:border-box;'>
+    <div style='font-size:12px;font-weight:700;color:{nfPrimaryColorTextET};text-transform:uppercase;letter-spacing:1.2px;line-height:1;'>Remaining Orders by Work Center</div>
+    <div style='height:2px;background:{nfAccentColorText};width:270px;border-radius:2px;margin-top:6px;'></div>
+  </div>
+
+
+  <!-- ═══ ROW 1: Concord · Eureka · Fresno · Lakeville · Martin · Metcalf · Midway ═══ -->
+  <div style='padding:6px 20px 4px 20px;box-sizing:border-box;'>
+    <table style='width:100%;border-collapse:collapse;table-layout:fixed;'>
+      <colgroup>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'>
+      </colgroup>
+      <tr>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>CONCORD</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "CONCORD")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>EUREKA</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "EUREKA")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>FRESNO</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "FRESNO")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>LAKEVILLE</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "LAKEVILLE")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>MARTIN</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "MARTIN")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>METCALF</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "METCALF")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>MIDWAY</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "MIDWAY")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+
+
+      </tr>
+    </table>
+  </div>
+
+
+  <!-- ═══ ROW 2: Moss Landing · Pismo Beach · Sacramento · Table Mountain · Victor · Willits · WOR TO DISCUSS ═══ -->
+  <div style='padding:4px 20px 8px 20px;box-sizing:border-box;'>
+    <table style='width:100%;border-collapse:collapse;table-layout:fixed;'>
+      <colgroup>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'>
+      </colgroup>
+      <tr>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>MOSS LANDING</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "MOSS LANDING")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>PISMO BEACH</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "PISMO BEACH")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>SACRAMENTO</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "SACRAMENTO")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>TABLE MOUNTAIN</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "TABLE MOUNTAIN")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>VICTOR</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "VICTOR")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#ffffff;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.07);border:1px solid #007FA3;border-left:4px solid #007FA3;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#003C71;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>WILLITS</div>
+            <div style='font-size:34px;font-weight:700;color:#003C71;line-height:1;padding-left:4px;'>{CountIf(colAllOrdersET, WorkCenter = "WILLITS")}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#d1d5db;text-transform:uppercase;letter-spacing:0.5px;'>Work Center</div>
+          </div>
+        </td>
+        <td></td>
+
+
+        <!-- WOR: To Discuss → Deep Red -->
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#fff1f2;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 14px 6px 14px;box-shadow:0 2px 6px rgba(220,38,38,0.15);border:1px solid #fecdd3;border-left:4px solid #dc2626;position:relative;'>
+            <div style='font-size:11px;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:8px;'>WOR · To Discuss</div>
+            <div style='font-size:34px;font-weight:700;color:#dc2626;line-height:1;padding-left:4px;'>{CountRows(Filter(colAllOrdersET, ToDiscuss))}</div>
+            <div style='position:absolute;bottom:6px;right:10px;font-size:9px;font-weight:600;color:#fca5a5;text-transform:uppercase;letter-spacing:0.5px;'>Flag</div>
+          </div>
+        </td>
+
+
+      </tr>
+    </table>
+  </div>
+
+
+</div>"
+
+
+&
+
+
+nfHtmlReset &
+$"<div style='font-family:Segoe UI,-apple-system,sans-serif;padding:0;margin:0;width:100%;box-sizing:border-box;background:#ffffff;'>
+
+
+  <!-- HEADER -->
+  <div style='padding:14px 20px 8px 20px;box-sizing:border-box;'>
+    <div style='font-size:12px;font-weight:700;color:{nfPrimaryColorTextET};text-transform:uppercase;letter-spacing:1.2px;line-height:1;'>Orders by Who With</div>
+    <div style='height:2px;background:{nfAccentColorText};width:200px;border-radius:2px;margin-top:6px;'></div>
+  </div>
+
+
+  <!-- 7 CARDS -->
+  <div style='padding:6px 20px 10px 20px;box-sizing:border-box;'>
+    <table style='width:100%;border-collapse:collapse;table-layout:fixed;'>
+      <colgroup>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'><col style='width:0.5%;'>
+        <col style='width:13.9%;'>
+      </colgroup>
+      <tr>
+
+
+        <!-- AS-BUILT TEAM -->
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#f0f9fc;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 12px 8px 12px;box-shadow:0 1px 4px rgba(0,127,163,0.12);border:1px solid #007FA3;position:relative;overflow:hidden;'>
+            <div style='position:absolute;top:0;left:0;width:100%;height:3px;background:#007FA3;border-radius:8px 8px 0 0;'></div>
+            <div style='font-size:10px;font-weight:700;color:#007FA3;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:10px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>AS-BUILT TEAM</div>
+            <div style='font-size:36px;font-weight:700;color:#003C71;line-height:1;'>
+              {CountIf(colAllOrdersET,
+                WhoWith = "AS-BUILT TEAM",
+                IsBlank(drp_regionSelectorET.Selected.Value) || Region = drp_regionSelectorET.Selected.Value,
+                IsBlank(drp_selectDivisionET.Selected.Value) || Division = drp_selectDivisionET.Selected.Value
+              )}
+            </div>
+
+        </td>
+        <td></td>
+
+
+        <!-- MAPPING -->
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#f0f9fc;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 12px 8px 12px;box-shadow:0 1px 4px rgba(0,127,163,0.12);border:1px solid #007FA3;position:relative;overflow:hidden;'>
+            <div style='position:absolute;top:0;left:0;width:100%;height:3px;background:#007FA3;border-radius:8px 8px 0 0;'></div>
+            <div style='font-size:10px;font-weight:700;color:#007FA3;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:10px;margin-top:4px;'>MAPPING</div>
+            <div style='font-size:36px;font-weight:700;color:#003C71;line-height:1;'>
+              {CountIf(colAllOrdersET,
+                WhoWith = "MAPPING",
+                IsBlank(drp_regionSelectorET.Selected.Value) || Region = drp_regionSelectorET.Selected.Value,
+                IsBlank(drp_selectDivisionET.Selected.Value) || Division = drp_selectDivisionET.Selected.Value
+              )}
+            </div>
+
+        </td>
+        <td></td>
+
+
+        <!-- ENGINEERING -->
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#f0f9fc;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 12px 8px 12px;box-shadow:0 1px 4px rgba(0,127,163,0.12);border:1px solid #007FA3;position:relative;overflow:hidden;'>
+            <div style='position:absolute;top:0;left:0;width:100%;height:3px;background:#007FA3;border-radius:8px 8px 0 0;'></div>
+            <div style='font-size:10px;font-weight:700;color:#007FA3;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:10px;margin-top:4px;'>ENGINEERING</div>
+            <div style='font-size:36px;font-weight:700;color:#003C71;line-height:1;'>
+              {CountIf(colAllOrdersET,
+                WhoWith = "ENGINEERING",
+                IsBlank(drp_regionSelectorET.Selected.Value) || Region = drp_regionSelectorET.Selected.Value,
+                IsBlank(drp_selectDivisionET.Selected.Value) || Division = drp_selectDivisionET.Selected.Value
+              )}
+            </div>
+
+        </td>
+        <td></td>
+
+
+        <!-- CONSTRUCTION -->
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#f0f9fc;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 12px 8px 12px;box-shadow:0 1px 4px rgba(0,127,163,0.12);border:1px solid #007FA3;position:relative;overflow:hidden;'>
+            <div style='position:absolute;top:0;left:0;width:100%;height:3px;background:#007FA3;border-radius:8px 8px 0 0;'></div>
+            <div style='font-size:10px;font-weight:700;color:#007FA3;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:10px;margin-top:4px;'>CONSTRUCTION</div>
+            <div style='font-size:36px;font-weight:700;color:#003C71;line-height:1;'>
+              {CountIf(colAllOrdersET,
+                WhoWith = "CONSTRUCTION",
+                IsBlank(drp_regionSelectorET.Selected.Value) || Region = drp_regionSelectorET.Selected.Value,
+                IsBlank(drp_selectDivisionET.Selected.Value) || Division = drp_selectDivisionET.Selected.Value
+              )}
+            </div>
+
+        </td>
+        <td></td>
+
+
+        <!-- JOB OWNER -->
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#f0f9fc;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 12px 8px 12px;box-shadow:0 1px 4px rgba(0,127,163,0.12);border:1px solid #007FA3;position:relative;overflow:hidden;'>
+            <div style='position:absolute;top:0;left:0;width:100%;height:3px;background:#007FA3;border-radius:8px 8px 0 0;'></div>
+            <div style='font-size:10px;font-weight:700;color:#007FA3;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:10px;margin-top:4px;'>JOB OWNER</div>
+            <div style='font-size:36px;font-weight:700;color:#003C71;line-height:1;'>
+              {CountIf(colAllOrdersET,
+                WhoWith = "JOB OWNER",
+                IsBlank(drp_regionSelectorET.Selected.Value) || Region = drp_regionSelectorET.Selected.Value,
+                IsBlank(drp_selectDivisionET.Selected.Value) || Division = drp_selectDivisionET.Selected.Value
+              )}
+            </div>
+
+        </td>
+        <td></td>
+
+
+        <!-- CLERICAL -->
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#f0f9fc;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 12px 8px 12px;box-shadow:0 1px 4px rgba(0,127,163,0.12);border:1px solid #007FA3;position:relative;overflow:hidden;'>
+            <div style='position:absolute;top:0;left:0;width:100%;height:3px;background:#007FA3;border-radius:8px 8px 0 0;'></div>
+            <div style='font-size:10px;font-weight:700;color:#007FA3;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:10px;margin-top:4px;'>CLERICAL</div>
+            <div style='font-size:36px;font-weight:700;color:#003C71;line-height:1;'>
+              {CountIf(colAllOrdersET,
+                WhoWith = "CLERICAL",
+                IsBlank(drp_regionSelectorET.Selected.Value) || Region = drp_regionSelectorET.Selected.Value,
+                IsBlank(drp_selectDivisionET.Selected.Value) || Division = drp_selectDivisionET.Selected.Value
+              )}
+            </div>
+
+        </td>
+        <td></td>
+
+
+        <!-- STANDARDS -->
+        <td style='padding:0;height:90px;vertical-align:top;'>
+          <div style='background:#f0f9fc;border-radius:8px;height:90px;box-sizing:border-box;padding:10px 12px 8px 12px;box-shadow:0 1px 4px rgba(0,127,163,0.12);border:1px solid #007FA3;position:relative;overflow:hidden;'>
+            <div style='position:absolute;top:0;left:0;width:100%;height:3px;background:#007FA3;border-radius:8px 8px 0 0;'></div>
+            <div style='font-size:10px;font-weight:700;color:#007FA3;text-transform:uppercase;letter-spacing:0.8px;line-height:1;margin-bottom:10px;margin-top:4px;'>STANDARDS</div>
+            <div style='font-size:36px;font-weight:700;color:#003C71;line-height:1;'>
+              {CountIf(colAllOrdersET,
+                WhoWith = "STANDARDS",
+                IsBlank(drp_regionSelectorET.Selected.Value) || Region = drp_regionSelectorET.Selected.Value,
+                IsBlank(drp_selectDivisionET.Selected.Value) || Division = drp_selectDivisionET.Selected.Value
+              )}
+            </div>
+
+        </td>
+
+
+      </tr>
+    </table>
+  </div>
+
+
+</div>"

@@ -12,14 +12,38 @@
 
 
 ### Standard Variable Naming Conventions
-The user consistently uses the following variable naming patterns:
-- `nfPrimaryColorText` - Primary brand color
-- `nfAccentColorText` - Accent/secondary color
-- `nfAppName` - Application name
-- `nfAppVersion` - Application version number
-- `vSelected[Entity]` - Selected item variables (e.g., `vSelectedOrder`, `vSelectedFormOrder`)
-- `col[EntityName]` - Collection variables (e.g., `colNotes`, `colOrders`)
-- `v[VariableName]` - General variables (e.g., `vShowSidePaneLeft`)
+
+#### Prefix Meanings
+
+| Prefix | Type | Scope | Set With |
+|---|---|---|---|
+| `nf` | **Named Formula** | App-wide, always calculated | `App.Formulas` |
+| `v` | **Context Variable** | Screen or component scope | `Set()` / `UpdateContext()` |
+| `col` | **Collection** | App-wide table/list | `Collect()` / `ClearCollect()` |
+| `drp_` | **Dropdown control** | Control naming convention | n/a |
+
+#### Common Named Formula Variables
+- `nfPrimaryColorText` — Primary brand color (CSS string for HTML)
+- `nfAccentColorText` — Accent/secondary color (CSS string for HTML)
+- `nfThridColorText` — Third brand color (CSS string for HTML) — note: "Thrid" is intentional
+- `nfLGreyText` — Light grey (CSS string for HTML)
+- `nfPrimaryColor` — Primary brand color (RGBA for Power Fx)
+- `nfAccentColor` — Accent color (RGBA for Power Fx)
+- `nfThirdColor` — Third color (RGBA for Power Fx)
+- `nfLGrey`, `nfGrey`, `nfDGrey` — Light / medium / dark grey (RGBA for Power Fx)
+- `nfAppName` — Application name
+- `nfAppVersion` — Application version number
+- `nfHtmlReset` — HTML body margin reset string
+
+#### Common Context Variables
+- `vSelected[Entity]` — Selected item (e.g. `vSelectedOrder`, `vSelectedFormOrder`)
+- `v[VariableName]` — General boolean/state variables (e.g. `vShowSidePaneLeft`)
+
+#### Collections
+- `col[EntityName]` — Collection variables (e.g. `colNotes`, `colOrders`, `colAudit`)
+
+#### Control Naming
+- `drp_[name]` — Dropdown controls (e.g. `drp_regionSelector`)
 
 
 ---
@@ -78,7 +102,7 @@ nfHtmlReset & $"<table style='...'>...</table>"
 
 ### Unsupported CSS Properties
 The following CSS properties are silently stripped or broken in the PA HtmlText renderer:
-- `position: fixed` and `position: absolute` — layout collapses or disappears
+- `position: fixed` — layout collapses or disappears
 - `position: sticky` — not supported
 - `backdrop-filter: blur()` — silently ignored
 - `clip-path` — not rendered
@@ -89,7 +113,6 @@ The following CSS properties are silently stripped or broken in the PA HtmlText 
 - `transform` — not supported
 - `filter` — not supported
 - `grid-template-columns` / CSS Grid — limited support; use `<table>` instead
-- `gap` on flex containers — inconsistent; use `<table>` column spacing instead
 
 
 ### Supported CSS Properties ✅
@@ -101,12 +124,14 @@ The following are confirmed to work reliably:
 - `font-family`, `font-size`, `font-weight`, `color`, `letter-spacing`, `text-transform`, `line-height`
 - `padding`, `margin`, `width`, `height` (fixed `px` or `%`)
 - `display: flex`, `flex-direction: row/column`, `align-items`, `justify-content`, `flex: 1`, `flex-shrink`
+- `gap` on flex containers — mostly works when `nfHtmlReset` is prepended
 - `display: inline-block`
 - `overflow: hidden`, `text-overflow: ellipsis`, `white-space: nowrap`
 - `box-sizing: border-box`
 - `opacity`
 - `rgba()` colors
 - `vertical-align`, `text-align`
+- `position: absolute` — works inside `<td>` and `<div>` containers; causes collapse only on the outermost root wrapper element
 - HTML entities (`&#8594;`, `&middot;`, `&nbsp;`, `&#8226;`)
 - Emojis as icon substitutes
 
@@ -317,31 +342,112 @@ $"<div style='padding:0;margin:0;'>
 ---
 
 
-## Color Standards
+### 5. Collection / List Rendering
+
+> This is the standard pattern for rendering repeating read-only data from a Power Apps collection into HTML. Since HTML in Canvas Apps has no interactivity (no click events, no editable fields), this pattern is **display-only**.
+
+**Structure**: `If(IsEmpty(collection), "<empty state html>", Concat(collection, $"<item html>"))`
+
+```powerfx
+nfHtmlReset &
+$"<div style='padding:0;margin:0;'>
+  {If(
+    IsEmpty(colAudit),
+
+    // Empty state — shown when collection has no records
+    "<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center;'>
+      <div style='font-size:48px;margin-bottom:16px;opacity:0.3;'>&#128203;</div>
+      <div style='font-size:16px;font-weight:600;color:#666;margin-bottom:8px;'>No Records Available</div>
+      <div style='font-size:13px;color:#999;'>Actions will appear here once recorded.</div>
+    </div>",
+
+    // Data state — Concat renders one block per record
+    Concat(
+      SortByColumns(colAudit, "timestamp", SortOrder.Descending),
+      $"<div style='background:#ffffff;border:1px solid #e2e8f0;border-left:4px solid {nfPrimaryColorText};border-radius:6px;padding:12px 16px;margin:0 0 6px 0;'>
+        <div style='display:flex;align-items:center;gap:10px;'>
+          <div style='width:28px;height:28px;border-radius:50%;background:{nfPrimaryColorText};display:flex;align-items:center;justify-content:center;flex-shrink:0;'>
+            <span style='font-size:12px;font-weight:700;color:#ffffff;'>{Upper(Left(user,1))}</span>
+          </div>
+          <div style='flex:1;'>
+            <div style='font-size:13px;font-weight:600;color:#0f172a;'>{EncodeHTML(user)}</div>
+            <div style='font-size:11px;color:#94a3b8;'>{EncodeHTML(email)}</div>
+          </div>
+          <div style='font-size:11px;color:#94a3b8;white-space:nowrap;'>{Text(timestamp, ""mmm dd, yyyy hh:mm ss"")}</div>
+        </div>
+        <div style='margin-top:8px;border-top:1px solid #f1f5f9;padding-top:8px;'>
+          <span style='display:inline-block;background:{nfAccentColorText};color:#ffffff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;padding:3px 9px;border-radius:20px;'>
+            {EncodeHTML(action)}
+          </span>
+        </div>
+      </div>"
+    )
+  )}
+</div>"
+```
+
+**Key Points:**
+- Always use `EncodeHTML()` on any field that may contain user-generated or special characters
+- Use `SortByColumns()` inside `Concat()` to control display order
+- The empty state uses a `$"..."` for the outer wrapper but the inner empty-state string is a plain `"..."` (no Power Fx interpolation needed there)
+- `Concat()` does not support interactive elements — for editable lists, use a native Gallery control
 
 
-### Primary Colors
-- **Primary**: `{nfPrimaryColorText}` — headers, buttons, brand elements
-- **Accent**: `{nfAccentColorText}` — accents, borders, highlights
+---
 
+All colors come from Named Formula variables defined in `App.Formulas`. Never hardcode brand colors — always reference these variables.
 
-### Neutral Gray Scale
-- **Dark Gray**: `#0f172a`, `#1e293b`, `#334155`, `#374151` — headings, primary text
-- **Medium Gray**: `#475569`, `#64748b`, `#6b7280` — secondary text, labels
-- **Light Gray**: `#94a3b8`, `#cbd5e1`, `#e2e8f0`, `#e5e7eb` — borders, dividers
-- **Background Gray**: `#f8fafc`, `#f9fafb`, `#f3f4f6` — subtle backgrounds
+### Named Formula Variables (Canonical Reference)
 
+The values below are the standard defaults. The **variable names never change** across apps; the values may differ per app.
 
-### Status Colors
-- **Red**: `#dc2626` (text), `#fee2e2` (background)
-- **Amber**: `#d97706` (text), `#fef3c7` (background)
-- **Green**: `#059669` (text), `#d1fae5` (background)
-- **Gray**: `#6b7280` (text), `#f1f5f9` (background)
+```powerfx
+// App info
+nfAppVersion = "1.0.14";
+nfAppName    = "App Name Here";
 
+// Brand colors — Power Fx RGBA format (use in Power Fx color parameters)
+nfPrimaryColor      = RGBA(0, 137, 196, 1);
+nfPrimaryColorTrans = RGBA(0, 137, 196, 0.1);
+nfAccentColor       = RGBA(7, 103, 155, 1);
+nfThirdColor        = RGBA(251, 187, 54, 1);
 
-### Selection / Highlight
-- **Selected Background**: `#e0f2fe` (light blue)
-- **Selected Border**: `{nfPrimaryColorText}` with 4px width
+// Brand colors — CSS string format (use inside HTML inline style='' attributes)
+nfPrimaryColorText = "rgba(0,137,196,1)";
+nfAccentColorText  = "rgba(7,103,155,1)";
+nfThridColorText   = "rgba(251,187,54,1)";  // Note: "Thrid" is intentional — do not rename
+
+// Neutral grays — CSS string format (use inside HTML inline style='' attributes)
+nfLGreyText = "rgba(245,245,245,1)";
+
+// Neutral grays — Power Fx RGBA format
+nfLGrey = RGBA(245, 245, 245, 1);
+nfGrey  = RGBA(200, 200, 200, 1);
+nfDGrey = RGBA(150, 150, 150, 1);
+
+// HTML body margin reset — prepend to every HtmlText control
+nfHtmlReset = "<style>body{margin:0;padding:0}</style>";
+```
+
+### When to Use Each Format
+
+| Situation | Use |
+|---|---|
+| Power Fx color parameter (e.g. `Fill`, `Color` on a native control) | `nfPrimaryColor`, `nfAccentColor`, `nfThirdColor`, `nfLGrey`, `nfGrey`, `nfDGrey` |
+| HTML inline `style=''` attribute value | `{nfPrimaryColorText}`, `{nfAccentColorText}`, `{nfThridColorText}`, `{nfLGreyText}` |
+| Prepend to HtmlText control | `nfHtmlReset & $"..."` |
+
+### Status / Semantic Colors
+
+These are not brand colors — they are semantic status indicators used in status badges and RAG (Red/Amber/Green) states. Hardcode these as-is:
+
+| Status | Text Color | Background Color |
+|---|---|---|
+| Rejected / Critical | `#dc2626` | `#fee2e2` |
+| Pending / Warning | `#d97706` | `#fef3c7` |
+| Approved / Success | `#059669` | `#d1fae5` |
+| Info / In Progress | `#2563eb` | `#dbeafe` |
+| Neutral / Draft | `#64748b` | `#f1f5f9` |
 
 
 ---
@@ -412,8 +518,8 @@ $"<table style='...'>
 
 
 ### Issue: Layout breaks / elements disappear
-**Cause**: Used `position: fixed`, `position: absolute`, `clip-path`, or `transform`
-**Solution**: Replace with table-based layout or normal document flow
+**Cause**: Used `position: fixed`, `clip-path`, or `transform`
+**Solution**: Replace with table-based layout or normal document flow. Note: `position: absolute` works inside `<td>` and `<div>` containers but will cause collapse if applied to the outermost root element.
 
 
 ### Issue: Text overflowing cells

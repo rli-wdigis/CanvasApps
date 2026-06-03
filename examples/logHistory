@@ -1,0 +1,39 @@
+$"
+<div style='padding:0;margin:0;font-family:Segoe UI,-apple-system,sans-serif;'>
+  {If(
+    IsEmpty(colAudit),
+    "<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center;'>
+      <div style='font-size:48px;margin-bottom:16px;opacity:0.3;'>&#128203;</div>
+      <div style='font-size:16px;font-weight:600;color:#374151;margin-bottom:8px;'>No Audit Records Available</div>
+      <div style='font-size:13px;color:#94a3b8;'>There are currently no activities logged in the audit trail. Actions performed within this application will appear here.</div>
+    </div>",
+    Concat(
+      SortByColumns(colAudit, "timestamp", SortOrder.Descending),
+      $"<div style='background:#ffffff;border:1px solid #e2e8f0;border-radius:6px;padding:10px 14px;margin:0 0 5px 0;border-left:4px solid {nfPrimaryColorTextET};box-shadow:0 1px 2px rgba(0,0,0,0.05);'>
+
+        <div style='display:flex;align-items:center;margin-bottom:8px;'>
+          <div style='width:28px;height:28px;border-radius:50%;background-color:{nfPrimaryColorTextET};display:flex;align-items:center;justify-content:center;color:#ffffff;font-weight:700;font-size:12px;margin-right:9px;'>
+            {Upper(Left(user, 1))}
+          </div>
+          <div style='flex:1;'>
+            <div style='font-size:13px;font-weight:600;color:#0f172a;'>{user}</div>
+            <div style='font-size:11px;color:#94a3b8;'>{userEmail}</div>
+          </div>
+          <div style='font-size:11px;color:#94a3b8;white-space:nowrap;'>
+            {Text(timestamp, "mmm dd, yyyy hh:mm ss")}
+          </div>
+        </div>
+
+        <div style='height:1px;background:#f1f5f9;margin:0 0 7px 0;'></div>
+
+        <div style='display:flex;align-items:center;'>
+          <div style='font-size:11px;font-weight:600;color:#ffffff;background-color:{nfAccentColorText};padding:3px 9px;border-radius:20px;letter-spacing:0.4px;text-transform:uppercase;white-space:nowrap;'>
+            {EncodeHTML(action)}
+          </div>
+        </div>
+
+      </div>"
+    )
+  )}
+</div>
+"

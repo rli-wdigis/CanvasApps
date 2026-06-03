@@ -1,0 +1,118 @@
+nfHtmlReset & $"<div style='font-family: Segoe UI, -apple-system, sans-serif; background: #f8fafc; height: {Parent.Height}px; margin: 0; padding: 0; display: flex; flex-direction: column; overflow: hidden; width: 100%;'>
+
+  <!-- Top Navigation Bar -->
+  <div style='background: {nfPrimaryColorText}; flex-shrink: 0; height: 64px; width: 100%; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.12);'>
+    <div style='padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 100%; box-sizing: border-box;'>
+
+      <div style='display: flex; align-items: center; gap: 12px;'>
+        <span style='font-size: 20px;'>🏦</span>
+        <div>
+          <div style='font-size: 16px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px;'>{nfAppName}</div>
+          <div style='font-size: 11px; color: rgba(255,255,255,0.7);'>CIBC — Canadian Imperial Bank of Commerce</div>
+        </div>
+      </div>
+
+      <div style='display: flex; align-items: center; gap: 12px;'>
+        <div style='text-align: right;'>
+          <div style='font-size: 13px; color: #ffffff; font-weight: 600;'>{User().FullName}</div>
+          <div style='font-size: 11px; color: rgba(255,255,255,0.7);'>{Text(Today(), "mmmm d, yyyy")}</div>
+        </div>
+        <div style='width: 34px; height: 34px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #ffffff; font-size: 14px;'>
+          {Upper(Left(User().FullName, 1))}
+        </div>
+
+      </div>
+
+    </div>
+    <div style='position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: {nfThridColorText};'></div>
+  </div>
+
+
+  <!-- Page Body — Centered -->
+  <div style='flex: 1; overflow-y: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 24px 24px;'>
+
+    <!-- Page Title -->
+    <div style='text-align: center; width: {RoundDown(Parent.Width * 0.46, 0)}px; margin-bottom: 36px;'>
+      <div style='display: inline-flex; align-items: center; gap: 6px; background: {nfAccentColorText}; color: #ffffff; padding: 4px 14px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 1px; margin-bottom: 16px;'>
+         &nbsp;INTAKE UPLOAD PORTAL
+      </div>
+      <div style='font-size: 32px; font-weight: 700; color: #0f172a; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 12px;'>Submit Your Documents</div>
+      <div style='font-size: 14px; color: #64748b; line-height: 1.7;'>Use this portal to submit files directly to the intake team for review and processing.</div>
+    </div>
+
+
+    <!-- Upload Drop Zone Card -->
+    <div style='width: {RoundDown(Parent.Width * 0.5, 0)}px; background: #ffffff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; overflow: hidden; margin-bottom: 28px;'>
+
+      <!-- Card Header -->
+      <div style='background: {nfPrimaryColorText}; padding: 18px 28px; display: flex; align-items: center; gap: 10px;'>
+        <span style='font-size: 18px;'>📤</span>
+        <div style='font-size: 15px; font-weight: 700; color: #ffffff;'>File Upload</div>
+        <div style='margin-left: auto; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 20px;'>Max 50 MB</div>
+      </div>
+
+      <!-- Drop Area -->
+      <div style='padding: 16px 32px; text-align: center; border-bottom: 1px solid #f1f5f9;'>
+        <div style='width: 44px; height: 44px; background: {nfLGreyText}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; border: 2px dashed {nfAccentColorText};'>
+          <span style='font-size: 20px;'>📂</span>
+        </div>
+        <div style='font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px;'>Drag &amp; drop your file here</div>
+        <div style='font-size: 12px; color: #94a3b8; margin-bottom: 12px;'>or click the button below to browse your device</div>
+
+        <!-- Upload control slot -->
+        <div data-slot='uploadButton' style='display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: {nfPrimaryColorText}; color: #ffffff; width: {Min(RoundDown(Parent.Width * 0.18, 0), 200)}px; height: {Min(RoundDown(Parent.Height * 0.048, 0), 40)}px; border-radius: 8px; font-size: {Min(RoundDown(Parent.Width * 0.011, 0), 14)}px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer;'>
+          <span>📁</span> Choose File
+        </div>
+      </div>
+
+      <!-- Accepted Formats Footer -->
+      <div style='padding: 14px 28px; background: {nfLGreyText}; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;'>
+        <div style='font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap;'>Accepted:</div>
+        <div style='display: flex; flex-wrap: wrap; gap: 6px;'>
+          <span style='background: #ffffff; border: 1px solid #e2e8f0; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; color: #475569;'>PDF</span>
+          <span style='background: #ffffff; border: 1px solid #e2e8f0; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; color: #475569;'>DOCX</span>
+          <span style='background: #ffffff; border: 1px solid #e2e8f0; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; color: #475569;'>XLSX</span>
+          <span style='background: #ffffff; border: 1px solid #e2e8f0; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; color: #475569;'>CSV</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- 3-Step Info Strip -->
+    <div style='width: {RoundDown(Parent.Width * 0.5, 0)}px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;'>
+
+      <div style='background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px 16px; text-align: center;'>
+        <div style='width: 36px; height: 36px; background: {nfPrimaryColorText}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;'>
+          <span style='font-size: 13px; font-weight: 700; color: #ffffff;'>1</span>
+        </div>
+        <div style='font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 4px;'>Select</div>
+        <div style='font-size: 12px; color: #64748b; line-height: 1.5;'>Choose a file from your device</div>
+      </div>
+
+      <div style='background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px 16px; text-align: center;'>
+        <div style='width: 36px; height: 36px; background: {nfAccentColorText}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;'>
+          <span style='font-size: 13px; font-weight: 700; color: #ffffff;'>2</span>
+        </div>
+        <div style='font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 4px;'>Confirm &amp; Upload</div>
+        <div style='font-size: 12px; color: #64748b; line-height: 1.5;'>Upload may take up to 1 minute depending on file size — do not close the app</div>
+      </div>
+
+      <div style='background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px 16px; text-align: center;'>
+        <div style='width: 36px; height: 36px; background: {nfThridColorText}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;'>
+          <span style='font-size: 13px; font-weight: 700; color: #ffffff;'>3</span>
+        </div>
+        <div style='font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 4px;'>Done</div>
+        <div style='font-size: 12px; color: #64748b; line-height: 1.5;'>Your file is picked up and routed through an automated workflow for further processing</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bottom Footer -->
+  <div style='flex-shrink: 0; height: 36px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center;'>
+    <div style='font-size: 11px; color: #94a3b8;'>{nfAppName} &nbsp;•&nbsp; v {nfAppVersion} &nbsp;•&nbsp; CIBC Internal Use Only</div>
+  </div>
+
+</div>"
