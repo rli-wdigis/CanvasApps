@@ -1,0 +1,164 @@
+$"
+<table style='table-layout: fixed; width: 100%; border-collapse: collapse; margin: 0; padding: 0; font-family: Segoe UI, sans-serif; background: {If(ThisItem.IsSelected, "#f1f5f9", "#ffffff")}; border-bottom: 1px solid #e2e8f0;'>
+<colgroup>
+    <!-- R1: ID --> <col style='width: 3%'>
+    <!-- R2: Status --> <col style='width: 8%'>
+    <!-- R3: Employee --> <col style='width: 8%'>
+    <!-- R4: Submitted By --> <col style='width: 7%'>
+    <!-- R5: Course Name --> <col style='width: 12%'>
+    <!-- R6: Location --> <col style='width: 8%'>
+    <!-- R7: Agency --> <col style='width: 8%'>
+    <!-- R8: Start Date --> <col style='width: 5%'>
+    <!-- R9: End Date --> <col style='width: 5%'>
+    <!-- R10: Days --> <col style='width: 4%'>
+    <!-- R11: Type --> <col style='width: 5%'>
+    <!-- R12: Reg Fees --> <col style='width: 6%'>
+    <!-- R13: Supervisor --> <col style='width: 7%'>
+    <!-- R14: Out of State --> <col style='width: 3%'>
+    <!-- R15: Mandatory --> <col style='width: 3%'>
+    <!-- R16: Request Date --> <col style='width: 5%'>
+    <!-- R17: Created By --> <col style='width: 7%'>
+    <!-- R18: Modified Date --> <col style='width: 5%'>
+    <!-- R19: Modified By --> <col style='width: 7%'>
+</colgroup>
+<tr style='cursor: pointer;'>
+  <!-- R1: ID --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: {nfPrimaryColorText}; font-weight: 600; position: relative;'>
+    {ThisItem.ID}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+<!-- R2: Status -->
+<td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; position: relative;'>
+  <span style='display: inline-block; min-width: 130px; white-space: nowrap; padding: 6px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; background: {Switch(ThisItem.Status.Value, 
+    "Draft", "#f1f5f9", 
+    "Supervisor Approval", "#fef3c7", 
+    "Admin Approval", "#fef3c7", 
+    "Training Coordinator Approval", "#fef3c7", 
+    "Chief Approval", "#fef3c7", 
+    "Approved-Pending", "#dbeafe", 
+    "Approved-Attended", "#d1fae5", 
+    "Approved-Not Attended", "#fee2e2", 
+    "Cancelled", "#f3f4f6",
+    "Rejected", "#dc2626", 
+    "#f1f5f9")}; color: {Switch(ThisItem.Status.Value, 
+    "Draft", "#64748b", 
+    "Supervisor Approval", "#d97706", 
+    "Admin Approval", "#d97706", 
+    "Training Coordinator Approval", "#d97706", 
+    "Chief Approval", "#d97706", 
+    "Approved-Pending", "#2563eb", 
+    "Approved-Attended", "#059669", 
+    "Approved-Not Attended", "#dc2626", 
+    "Cancelled", "#6b7280", 
+    "Rejected", "#FFFFFF",
+    "#64748b")};'>{ThisItem.Status.Value}</span>
+  <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+</td>
+
+
+  
+  <!-- R3: Employee --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.'Employee Name'.DisplayName}'>
+    {ThisItem.'Employee Name'.DisplayName}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R4: Submitted By --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.'Created By'.DisplayName}'>
+    {ThisItem.'Created By'.DisplayName}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R5: Course Name --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.'Training Course Name'}'>
+    {ThisItem.'Training Course Name'}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R6: Location --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.'Training Location'}'>
+    {ThisItem.'Training Location'}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R7: Agency --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.'Sponsoring Agency'}'>
+    {ThisItem.'Sponsoring Agency'}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R8: Start Date --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; position: relative;'>
+    {Text(ThisItem.'Training Start Date', "mm/dd/yy")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R9: End Date --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; position: relative;'>
+    {Text(ThisItem.'Training End Date', "mm/dd/yy")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R10: Days --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 600; position: relative;'>
+    {ThisItem.'Total Training Days'}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R11: Type --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 10px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.'Training Type'.Value}'>
+    {If(ThisItem.'Training Type'.Value = "Personal Development", "Personal", ThisItem.'Training Type'.Value)}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R12: Reg Fees --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 600; position: relative;'>
+    {Text(ThisItem.'Registration Fees', "[$-en-US]$#,##0")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R13: Supervisor --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.'Supervisor Approver'.DisplayName}'>
+    {If(!IsBlank(ThisItem.'Supervisor Approver'.DisplayName), Left(ThisItem.'Supervisor Approver'.DisplayName, 12), "-")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R14: Out of State --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 14px; position: relative;'>
+    {If(ThisItem.'Is Out Of State', "<span style='color: #dc2626; font-weight: 600;'>✓</span>", "<span style='color: #e2e8f0;'>–</span>")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R15: Mandatory --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 14px; position: relative;'>
+    {If(ThisItem.'Is Mandatory Training', "<span style='color: #2563eb; font-weight: 600;'>✓</span>", "<span style='color: #e2e8f0;'>–</span>")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R16: Request Date --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; position: relative;'>
+    {Text(ThisItem.Created, "mm/dd/yy")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R17: Created By --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.'Created By'.DisplayName}'>
+    {If(!IsBlank(ThisItem.'Created By'.DisplayName), Left(ThisItem.'Created By'.DisplayName, 10), "-")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R18: Modified Date --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; position: relative;'>
+    {Text(ThisItem.Modified, "mm/dd/yy")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+  
+  <!-- R19: Modified By (no divider on last column) --> 
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;' title='{ThisItem.'Modified By'.DisplayName}'>
+    {If(!IsBlank(ThisItem.'Modified By'.DisplayName), Left(ThisItem.'Modified By'.DisplayName, 10), "-")}
+  </td>
+
+</tr>
+</table>
+"
