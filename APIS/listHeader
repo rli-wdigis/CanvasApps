@@ -1,0 +1,38 @@
+nfHtmlReset & $"<table style='table-layout: fixed; width: 100%; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; font-family: Segoe UI, -apple-system, sans-serif; border: 0;'>
+  <colgroup>
+    <!-- C1:  Request ID        --><col style='width: 7%;'>
+    <!-- C2:  Status            --><col style='width: 5%;'>
+    <!-- C3:  PO Type           --><col style='width: 6%;'>
+    <!-- C4:  Department        --><col style='width: 7%;'>
+    <!-- C5:  Invoice Number    --><col style='width: 8%;'>
+    <!-- C6:  Invoice Amount    --><col style='width: 5%;'>
+    <!-- C7:  Vendor Name       --><col style='width: 12%;'>
+    <!-- C8:  Vendor Code       --><col style='width: 6%;'>
+    <!-- C9:  PO Number         --><col style='width: 7%;'>
+    <!-- C10: Total PO Value    --><col style='width: 7%;'>
+    <!-- C11: Created By        --><col style='width: 6%;'>
+    <!-- C12: Created On        --><col style='width: 5%;'>
+    <!-- C13: Modified By       --><col style='width: 6%;'>
+    <!-- C14: Modified On       --><col style='width: 5%;'>
+    <!-- C15: Creation Method   --><col style='width: 4%;'>
+    <!-- C16: Vadim Sync Status --><col style='width: 5%;'>
+  </colgroup>
+  <tr style='border: 0;'>
+    <!-- H1  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Request ID</th>
+    <!-- H2  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Status</th>
+    <!-- H3  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>PO Type</th>
+    <!-- H4  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Department</th>
+    <!-- H5  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Invoice Number</th>
+    <!-- H6  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Invoice Amount</th>
+    <!-- H7  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Vendor Name</th>
+    <!-- H8  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Vendor Code</th>
+    <!-- H9  --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>PO Number</th>
+    <!-- H10 --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Total PO Value</th>
+    <!-- H11 --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Created By</th>
+    <!-- H12 --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Created On</th>
+    <!-- H13 --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Modified By</th>
+    <!-- H14 --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Modified On</th>
+    <!-- H14 --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; border-right: 1px solid rgba(255,255,255,0.1); padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Creation Method</th>
+    <!-- H15 --><th style='background-color: {nfPrimaryColorText}; color: #ffffff; font-weight: 600; border: 0; padding: 16px 12px; text-align: center; vertical-align: middle; font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; word-break: break-word; white-space: nowrap;'>Sync Status</th>
+  </tr>
+</table>"

@@ -1,0 +1,61 @@
+nfHtmlReset & $"
+<table style='table-layout: fixed; width: 100%; border-collapse: collapse; margin: 0; padding: 0; font-family: Segoe UI, sans-serif; background: {If(ThisItem.IsSelected, "#f1f5f9", "#ffffff")}; border-bottom: 1px solid #e2e8f0;'>
+<colgroup>
+    <!-- R1: Line #         --><col style='width: 5%'>
+    <!-- R2: GL Code        --><col style='width: 10%'>
+    <!-- R3: GL Name        --><col style='width: 20%'>
+    <!-- R4: CC1            --><col style='width: 10%'>
+    <!-- R5: CC2            --><col style='width: 10%'>
+    <!-- R6: Distr. Amount  --><col style='width: 15%'>
+    <!-- R7: Distr. Percent --><col style='width: 15%'>
+    <!-- R8: Action         --><col style='width: 15%'>
+</colgroup>
+<tr style='cursor: pointer;'>
+  <!-- R1: Line # -->
+  <td style='padding: 11px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: {nfPrimaryColorText}; font-weight: 600; position: relative;'>
+    {ThisItem.UniqueKey}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R2: GL Code -->
+  <td style='padding: 11px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 500; position: relative;'>
+    {ThisItem.GL}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R3: GL Name -->
+  <td style='padding: 11px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.GLName}'>
+    {ThisItem.GLName}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R4: CC1 -->
+  <td style='padding: 11px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.CC1}'>
+    {ThisItem.CC1}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R5: CC2 -->
+  <td style='padding: 11px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.CC2}'>
+    {ThisItem.CC2}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R6: Distr. Amount -->
+  <td style='padding: 11px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 600; position: relative;'>
+    {Text(ThisItem.ItemDistributionAmount, "[$-en-US],$#,##0.00")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R7: Distr. Percent -->
+  <td style='padding: 11px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 600; position: relative;'>
+    {Text(100 * ThisItem.ItemDistributionPercent, "0.00%")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R8: Action (empty — delete button overlaid in app) -->
+  <td style='padding: 11px 6px;'></td>
+
+</tr>
+</table>
+"

@@ -1,0 +1,286 @@
+If(
+    !ctr_form.Visible,
+    With(
+        {
+            _activeTemplate: colActiveTemplate,
+            // Rejected is not a train stop: it returns the request to the creator,
+            // so it displays at the Draft position (flagged red below).
+            _isRejected: vSelectedRequest.Status = "Rejected",
+            _effectiveStatus: If(vSelectedRequest.Status = "Rejected", "Draft", vSelectedRequest.Status)
+        },
+        With(
+            {
+                _stageCount: CountRows(_activeTemplate),
+                _maxSort: Max(_activeTemplate, sort),
+                _lookupSort: LookUp(
+                    _activeTemplate,
+                    stage = _effectiveStatus,
+                    sort
+                )
+            },
+            With(
+                {
+                    _isOffTemplate: !IsBlank(_effectiveStatus) && IsBlank(_lookupSort)
+                },
+                With(
+                    {
+                        _currentSort: Coalesce(_lookupSort, If(_isOffTemplate, _maxSort, -1)),
+                        _activeColor: If(_isOffTemplate, "#dc2626", nfPrimaryColorText),
+                        _activeText: If(_isOffTemplate, "#dc2626", nfPrimaryColorText),
+                        _inactiveColor: "#e0e0e0",
+                        _inactiveText: "#999999"
+                    },
+                    With(
+                        {
+                            _progressLinePct: If(
+                                _isOffTemplate, 100,
+                                If(_currentSort < 0, 0, Round((_currentSort + 0.5) / _stageCount * 100, 2))
+                            )
+                        },
+            $"
+<div style='font-family: Segoe UI, sans-serif; max-width: 100%; background: #ffffff;'>
+
+    <!-- PROGRESS TRAIN -->
+    <div style='background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin: 0 20px 20px 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);'>
+        <div style='position: relative;'>
+            <div style='display: flex; position: relative; align-items: flex-start;'>
+
+                <div style='position: absolute; top: 12px; left: 0; right: 0; height: 3px; background-color: {_inactiveColor}; z-index: 1;'></div>
+
+                <div style='position: absolute; top: 12px; left: 0; height: 3px; background-color: {_activeColor}; z-index: 2; width: {_progressLinePct}%; transition: width 0.4s ease;'></div>
+
+                {Concat(
+                    SortByColumns(_activeTemplate, "sort"),
+                    $"
+                    <div style='flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;'>
+                        <div style='width: 26px; height: 26px; border-radius: 50%;
+                            background-color: {If(_isRejected && sort = _currentSort, "#dc2626", If(sort <= _currentSort, _activeColor, _inactiveColor))};
+                            display: flex; align-items: center; justify-content: center; color: white;
+                            font-weight: 600; font-size: 11px; position: relative; z-index: 10;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.15);'>
+                            {If(_isRejected && sort = _currentSort, "✕", If(_isOffTemplate && sort = _maxSort, "✕", If(sort < _currentSort, "✓", Text(sort + 1))))}
+                        </div>
+                        <div style='margin-top: 10px; font-size: 10px; font-weight: 600;
+                            color: {If(_isRejected && sort = _currentSort, "#dc2626", If(sort <= _currentSort, _activeText, _inactiveText))};
+                            text-align: center; white-space: nowrap; letter-spacing: 0.2px;'>
+                            {If(_isRejected && sort = _currentSort, "Rejected", If(_isOffTemplate && sort = _maxSort, Upper(vSelectedRequest.Status), stage))}
+                        </div>
+                    </div>"
+                )}
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div style='padding: 0 20px 20px 20px;'>
+
+        <!-- INVOICE DETAILS -->
+        <div style='background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px;'>
+            <h3 style='margin: 0 0 16px 0; font-size: 16px; color: {nfPrimaryColorText}; border-bottom: 2px solid {nfPrimaryColorText}; padding-bottom: 8px;'>Invoice Details</h3>
+
+            <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 16px;'>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Request Number</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.RequestNum, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Status</label>
+                    <div style='font-size: 14px; color: #0f172a; font-weight: 600;'>{Coalesce(vSelectedRequest.Status, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Invoice Number</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.InvoiceNumber, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Vendor Name</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.VendorName, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Vendor Code</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.VendorCode, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Department</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.Department, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Invoice Date</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{If(IsBlank(vSelectedRequest.InvoiceDate), "—", Text(vSelectedRequest.InvoiceDate, "mmm dd, yyyy"))}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Due Date</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{If(IsBlank(vSelectedRequest.DueDate), "—", Text(vSelectedRequest.DueDate, "mmm dd, yyyy"))}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Amount</label>
+                    <div style='font-size: 15px; color: #0f172a; font-weight: 600;'>{If(IsBlank(vSelectedRequest.Amount), "—", Text(vSelectedRequest.Amount, "$#,##0.00"))}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Bank Code</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.BankCode, "—")}</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PO AND FINANCIAL DETAILS -->
+        <div style='background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px;'>
+            <h3 style='margin: 0 0 16px 0; font-size: 16px; color: {nfPrimaryColorText}; border-bottom: 2px solid {nfPrimaryColorText}; padding-bottom: 8px;'>PO and Financial Details</h3>
+
+            <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 16px;'>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>PO Number</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.PONumber, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>PO Type</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.POType, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Total PO Value</label>
+                    <div style='font-size: 15px; color: #0f172a; font-weight: 600;'>{If(IsBlank(vSelectedRequest.TotalPOValue), "—", Text(vSelectedRequest.TotalPOValue, "$#,##0.00"))}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Remaining Funds Available</label>
+                    <div style='font-size: 15px; color: #0f172a; font-weight: 600;'>{If(IsBlank(vSelectedRequest.RemainingFundsAvailable), "—", Text(vSelectedRequest.RemainingFundsAvailable, "$#,##0.00"))}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Quantity To Be Applied</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(Text(vSelectedRequest.QuantityToBeApplied), "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Invoice Quantities</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(Text(vSelectedRequest.InvoiceQuantities), "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Quantities Remaining</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(Text(vSelectedRequest.QuantitiesRemaining), "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Percentage to be Applied</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{If(IsBlank(vSelectedRequest.PercentagetobeApplied), "—", Text(vSelectedRequest.PercentagetobeApplied) & "%")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Inventory Status</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.InventoryStatus, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>PO Exemption</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{If(vSelectedRequest.POExemption, "Yes", "No")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>PO Exemption Reason</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.POExemptionReason, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Maintenance or Holdback</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{If(vSelectedRequest.MaintenanceorHoldback, "Yes", "No")}</div>
+                </div>
+
+                <div style='grid-column: 1 / -1;'>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>PO Description</label>
+                    <div style='font-size: 14px; color: #0f172a; white-space: pre-wrap;'>{Coalesce(vSelectedRequest.PODescription, "—")}</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- APPROVAL DETAILS -->
+        <div style='background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px;'>
+            <h3 style='margin: 0 0 16px 0; font-size: 16px; color: {nfPrimaryColorText}; border-bottom: 2px solid {nfPrimaryColorText}; padding-bottom: 8px;'>Approval Details</h3>
+
+            <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 16px;'>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Current Approver</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.CurrentApprover, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Department Approver</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(Text(vSelectedRequest.DeptApproverName), "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Preparer Name</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.PreparerName, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Preparer Email</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.PreparerEmail, "—")}</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SYSTEM DETAILS -->
+        <div style='background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;'>
+            <h3 style='margin: 0 0 16px 0; font-size: 16px; color: {nfPrimaryColorText}; border-bottom: 2px solid {nfPrimaryColorText}; padding-bottom: 8px;'>System Details</h3>
+
+            <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 16px;'>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Creation Method</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.CreationMethod, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Sync Status</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.SyncStatus, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Created</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{If(IsBlank(vSelectedRequest.Created), "—", Text(vSelectedRequest.Created, "mmm dd, yyyy hh:mm AM/PM"))}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Created By</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.CreatedBy, "—")}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Modified</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{If(IsBlank(vSelectedRequest.Modified), "—", Text(vSelectedRequest.Modified, "mmm dd, yyyy hh:mm AM/PM"))}</div>
+                </div>
+
+                <div>
+                    <label style='display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 4px;'>Modified By</label>
+                    <div style='font-size: 14px; color: #0f172a;'>{Coalesce(vSelectedRequest.ModifiedBy, "—")}</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>"
+                    )
+                )
+            )
+        )
+    )
+)

@@ -1,0 +1,17 @@
+nfHtmlReset & $"
+<table style='table-layout: fixed; width: 100%; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; font-family: Segoe UI, sans-serif; border: 1px solid #e2e8f0;'>
+  <colgroup>
+    <col style='width: 50%'>
+    <col style='width: 50%'>
+  </colgroup>
+  <!-- PO exemption usage summary -->
+  <tr style='background: #ffffff; border-bottom: 1px solid #e2e8f0; height: 60px;'>
+    <td style='padding: 6px; vertical-align: middle; text-align: center;'><div style='font-size: 10px; color: #64748b; font-weight: 600; margin-bottom: 2px;'>Amount Used</div><div style='font-size: 13px; color: #1e40af; font-weight: 700;'>{Coalesce(Text(Sum(colExemptions, ItemDistributionAmount), "[$-en-US]$#,##0.00"), "$0.00")} / {Coalesce(Text(vCurrentInvoiceAmt, "[$-en-US]$#,##0.00"), "$0.00")}</div></td>
+    <td style='padding: 6px; vertical-align: middle; text-align: center;'><div style='font-size: 10px; color: #64748b; font-weight: 600; margin-bottom: 2px;'>Percent Used</div><div style='font-size: 13px; color: #1e40af; font-weight: 700;'>{
+        If(vCurrentInvoiceAmt <= 0,
+            Text(1 * ((Sum(colExemptions, ItemDistributionAmount) - vCurrentInvoiceAmt) / 1), "##0.00%"),
+            Text(100 * (Sum(colExemptions, ItemDistributionAmount) / vCurrentInvoiceAmt), "##0.00%")
+        )
+    }</div></td>
+  </tr>
+</table>"

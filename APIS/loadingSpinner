@@ -1,0 +1,23 @@
+nfHtmlReset & "<style>html,body{overflow:hidden}</style>" & $"<div style='font-family: Segoe UI, -apple-system, sans-serif; width: 100%; height: {Parent.Height}px; margin: 0; padding: 0; background: rgba(255,255,255,0.95); overflow: hidden; display: flex; align-items: center; justify-content: center;'>
+
+  <!-- Horizontal lockup: spinner left, text right -->
+  <div style='display: flex; flex-direction: row; align-items: center; gap: 20px;'>
+
+    <!-- Spinning ring: SVG SMIL animation via data URI (CSS keyframes are stripped by HtmlText) -->
+    <img style='width: 56px; height: 56px; display: block;' src='data:image/svg+xml;utf8,{EncodeUrl(
+      "<svg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 50 50'>
+        <circle cx='25' cy='25' r='20' fill='none' stroke='#e8edf3' stroke-width='5'/>
+        <path fill='none' stroke='" & nfPrimaryColorText & "' stroke-width='5' stroke-linecap='round' d='M25 5 a20 20 0 0 1 20 20'>
+          <animateTransform attributeName='transform' type='rotate' from='0 25 25' to='360 25 25' dur='0.9s' repeatCount='indefinite'/>
+        </path>
+      </svg>"
+    )}'/>
+
+    <!-- App name + status text -->
+    <div style='border-left: 3px solid {nfAccentColorText}; padding-left: 20px;'>
+      <div style='font-size: 20px; font-weight: 700; color: {nfPrimaryColorText}; letter-spacing: -0.3px;'>{nfAppName}</div>
+      <div style='margin-top: 4px; font-size: 13px; color: #64748b; font-weight: 500;'>Loading, please wait…</div>
+    </div>
+
+  </div>
+</div>"

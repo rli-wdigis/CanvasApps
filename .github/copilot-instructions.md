@@ -65,6 +65,9 @@ $"<div style="font-size:13px;">text</div>"
 
 // ❌ Wrong — escaped quotes inside {} don't work in Power Apps
 $"<div style='color:{If(done, \"green\", \"red\")};'>text</div>"
+
+// ❌ Wrong — doubled quotes inside {} don't work in Power Apps
+$"<div style='color:{If(done, ""green"", ""red"")};'>text</div>"
 ```
 
 > **Rule:** Never use double quotes in HTML text content either. For quotation marks in visible text, use single quotes instead.

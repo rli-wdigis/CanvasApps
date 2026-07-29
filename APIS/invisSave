@@ -1,0 +1,352 @@
+
+Concurrent(
+    Set(vShowSpinner, true),
+    Set(vShowCtrConfirmation, false),
+    Patch(colAudit, Defaults(colAudit),
+        {
+            comment: If(vAction = "Reassigned", $"{vSelectedRequest.DeptApproverName} ({vSelectedRequest.DeptApproverEmail}) > {cbx_reassign.Selected.GPUserName} ({cbx_reassign.Selected.GPUserEmail})", txt_negativeComment.Text),
+            desc: $"{vAction} | { Coalesce(vSelectedRequest.Status, "Draft") }",
+            ts: Now(),
+            userEmail: vCurrentUser.Email,
+            userName: vCurrentUser.FullName
+        }
+    )
+);
+
+With(
+    {_isNew: vIsNew || IsBlank(vSelectedRequest)},
+    IfError(
+        // ---- 1. Single SharePoint Patch (create when new, update otherwise) ----
+        Set(vLastPatched,
+            Patch(APIS_SPO_List_Requests,
+                If(_isNew,
+                    Defaults(APIS_SPO_List_Requests),
+                    LookUp(APIS_SPO_List_Requests, ID = vSelectedRequest.ID)
+                ),
+                {
+                    AttachmentGUID: vSelectedRequestGUID,
+                    'Audit Trail': JSON(colAudit, JSONFormat.Compact),
+                    'Bank Code': Coalesce(cbx_vendorName.Selected.BankCode, vSelectedRequest.BankCode),
+
+                    // Caller contract: blank vDeptApprover* keeps the stored values,
+                    // vClearDeptApprover wipes them; blank vNextApprover* routes by
+                    // stage name.
+                    'Current Approver': Coalesce(vNextApproverName, vNextStage),
+                    'Current Approver Email': Coalesce(vNextApproverEmail, vNextStage),
+                    Department: cbx_department.Selected.Value,
+                    'Dept Approver Email': If(vClearDeptApprover, Blank(), Coalesce(vDeptApproverEmail, vSelectedRequest.DeptApproverEmail)),
+                    'Dept Approver Name': If(vClearDeptApprover, Blank(), Coalesce(vDeptApproverName, vSelectedRequest.DeptApproverName)),
+
+                    'Due Date': dp_dueDate.SelectedDate,
+                    'Invoice Amount': num_invoiceAmount.Value,
+                    'Invoice Date': dp_invoiceDate.SelectedDate,
+                    'Invoice Number': txt_invoiceNumber.Text,
+                    'Maintenance or Holdback': tog_maintainanceHoldback.Checked,
+                    Notes: JSON(colNotes, JSONFormat.Compact),
+                    'Percentage to be Applied': Coalesce(num_percentTobeApplied.Value, vSelectedRequest.PercentagetobeApplied),
+                    'PO Description': Coalesce(txt_poDescription.Text, vSelectedRequest.PODescription),
+                    'PO Exemption': tog_poExemption.Checked,
+                    'PO Exemption Reason': cbx_poExemptionReason.Selected,
+                    'PO Number': Coalesce(txt_poNumber.Text, vSelectedRequest.PONumber),
+                    'PO Type': Coalesce(txt_poType.Text, vSelectedRequest.POType),
+                    POInfoJSON: If(tog_poExemption.Checked, Blank(), If(!IsBlank(vSelectedPODetail), JSON(vSelectedPODetail, JSONFormat.Compact))),
+                    POLineInfoJSON: If(tog_poExemption.Checked, If(!IsEmpty(colExemptions), JSON(colExemptions, JSONFormat.Compact)) , If(!IsEmpty(colNonExemptions), JSON(colNonExemptions, JSONFormat.Compact ) ) ),
+                    'Preparer Email': Coalesce(cbx_preparer.Selected.Mail, vSelectedRequest.PreparerEmail),
+                    'Preparer Name': Coalesce(cbx_preparer.Selected.DisplayName, vSelectedRequest.PreparerName),
+                    'Remaining Funds Available': Coalesce(num_remainingFundsAvailable.Value, vSelectedRequest.RemainingFundsAvailable),
+                    Status: {Value: vNextStage},
+
+                    // Routing actions fire the flow; a quick save writes Blank()
+                    // so the flow's not-empty trigger condition skips it. New
+                    // records stay blank here and get stamped in step 2, after
+                    // RequestNum exists.
+                    TriggerAction:
+                        If(!_isNew && vAction in ["Requested approval", "Approved", "Rejected", "Reassigned"],
+                            vAction
+                        ),
+
+                    'Total PO Value': Coalesce(num_totalPOValue.Value, vSelectedRequest.TotalPOValue),
+                    'Vendor Code': Coalesce(cbx_vendorName.Selected.VendorCode, vSelectedRequest.VendorCode),
+                    'Vendor Name': Coalesce(cbx_vendorName.Selected.VendorName, vSelectedRequest.VendorName)
+                }
+            )
+        );
+
+        // ---- 2. New records: stamp the request number and fire the flow ----
+        If(_isNew,
+            Set(vLastPatched,
+                Patch(APIS_SPO_List_Requests, vLastPatched,
+                    {
+                        RequestNum: "R-" & Text(vLastPatched.ID, "00000000"),
+                        // Submitted-on-create keeps the real action; a plain
+                        // first save fires as "Created" so the flow can branch.
+                        TriggerAction:
+                            If(vAction in ["Requested approval", "Approved", "Rejected", "Reassigned"],
+                                vAction,
+                                "Created"
+                            )
+                    }
+                )
+            )
+        );
+
+        // ---- 3. Single collection Patch, mapped from the server's returned record ----
+        Set(vSelectedRequest,
+            Patch(colAllRequests,
+                If(_isNew,
+                    Defaults(colAllRequests),
+                    LookUp(colAllRequests, ID = vSelectedRequest.ID)
+                ),
+                {
+                    AttachmentGUID: vLastPatched.AttachmentGUID,
+                    AuditTrail: vLastPatched.'Audit Trail',
+                    BankCode: vLastPatched.'Bank Code',
+
+                    // Stamp creator info only on create; keep the original on edits.
+                    Created:        If(_isNew, Now(),                 vSelectedRequest.Created),
+                    CreatedBy:      If(_isNew, vCurrentUser.FullName, vSelectedRequest.CreatedBy),
+                    CreatedByEmail: If(_isNew, vCurrentUser.Email,    vSelectedRequest.CreatedByEmail),
+
+                    CurrentApprover: vLastPatched.'Current Approver',
+                    CurrentApproverEmail: vLastPatched.'Current Approver Email',
+                    Department: vLastPatched.Department,
+                    DeptApproverEmail: vLastPatched.'Dept Approver Email',
+                    DeptApproverName: vLastPatched.'Dept Approver Name',
+                    DueDate: vLastPatched.'Due Date',
+                    ID: vLastPatched.ID,
+                    InvoiceAmount: vLastPatched.'Invoice Amount',
+                    InvoiceDate: vLastPatched.'Invoice Date',
+                    InvoiceNumber: vLastPatched.'Invoice Number',
+                    MaintenanceorHoldback: vLastPatched.'Maintenance or Holdback',
+                    Notes: vLastPatched.Notes,
+                    PercentagetobeApplied: vLastPatched.'Percentage to be Applied',
+                    PODescription: vLastPatched.'PO Description',
+                    POExemption: vLastPatched.'PO Exemption',
+                    POExemptionReason: vLastPatched.'PO Exemption Reason'.Value,
+                    POInfoJSON: vLastPatched.POInfoJSON,
+                    POLineInfoJSON: vLastPatched.POLineInfoJSON,
+                    PONumber: vLastPatched.'PO Number',
+                    POType: vLastPatched.'PO Type',
+                    PreparerEmail: vLastPatched.'Preparer Email',
+                    PreparerName: vLastPatched.'Preparer Name',
+                    RemainingFundsAvailable: vLastPatched.'Remaining Funds Available',
+                    RequestNum: vLastPatched.RequestNum,
+                    Status: vNextStage,
+                    TotalPOValue: vLastPatched.'Total PO Value',
+                    VendorCode: vLastPatched.'Vendor Code',
+                    VendorName: vLastPatched.'Vendor Name'
+                }
+            )
+        ),
+
+        // ---- On error: report and stay on the screen ----
+        Concurrent(
+            Set(vShowSpinner, false),
+            Notify($"Save failed: {FirstError.Message}", NotificationType.Error)
+        ),
+
+        // ---- On success ----
+        Concurrent(
+            Set(vIsNew, false),
+            Set(vShowSpinner, false),
+            Set(vNextApproverName, Blank()),
+            Set(vNextApproverEmail, Blank()),
+            Set(vDeptApproverName, Blank()),
+            Set(vDeptApproverEmail, Blank()),
+            Set(vClearDeptApprover, false),
+            Reset(cbx_reassign),
+            Reset(txt_negativeComment),
+            Notify("Saved successfully", NotificationType.Success, 2000)
+        );
+        If(vStayAfterSave,
+            Set(vStayAfterSave, false),
+            Navigate(scr_list, ScreenTransition.Fade)
+        )
+    )
+)
+
+
+// =============================================================================
+// CALLER SNIPPETS — OnSelect for each visible button. The per-action routing
+// logic lives HERE now; btn_invisSave is fully generic.
+// =============================================================================
+
+// ---- SAVE button (quick save — never changes stage or routing) ---------------
+// vNextStage = the CURRENT status: an app-created record saves as "Draft"
+// (vIsNew / blank vSelectedRequest => Coalesce falls back to "Draft"), an
+// AI/email-created record stays "Unassigned", an in-flight record keeps its stage.
+// vNextApprover* = the CURRENT routing values, so Current Approver is untouched;
+// blank on a brand-new record => falls back to the creator.
+// Dept Approver passes the combobox: blank (nothing picked) => keep stored value.
+// vStayAfterSave keeps the user on the form instead of navigating to scr_list.
+// First-time save of a new record still stamps RequestNum and fires the flow
+// with TriggerAction: "Created" (that logic is inside invisSave and keys off
+// vIsNew / blank vSelectedRequest). Quick saves of EXISTING records write a
+// blank TriggerAction, so the flow does not fire.
+// If you have a required-fields check, wrap this whole block in it and only
+// run the Sets + Select when validation passes.
+/*
+Set(vAction, "Saved request");
+Set(vNextStage, Coalesce(vSelectedRequest.Status, "Draft"));
+Set(vNextApproverName,  Coalesce(vSelectedRequest.CurrentApprover,      vCurrentUser.FullName));
+Set(vNextApproverEmail, Coalesce(vSelectedRequest.CurrentApproverEmail, vCurrentUser.Email));
+Set(vDeptApproverName,  cbx_departmentApprover.Selected.GPUserName);
+Set(vDeptApproverEmail, cbx_departmentApprover.Selected.GPUserEmail);
+Set(vStayAfterSave, true);
+Select(btn_invisSave)
+*/
+
+// ---- SUBMIT / ASSIGN button ------------------------------------------------
+// From "Unassigned" (admin flow): routes to the preparer, moves to "Draft".
+// From "Draft" (normal submit): routes to the dept approver, moves to
+// "Department Approval".
+// Order of gates: required-field check -> duplicate check -> confirmation
+// popup. The popup's confirm button is what actually calls
+// Select(btn_invisSave), so routing vars are only set once both gates pass.
+// Duplicate guard: blocks the submit when another record already carries the
+// same vendor + invoice number. Vendor code Coalesces to the stored record
+// (the combobox may be untouched on an edit), matching invisSave's pattern.
+// The Filter runs server-side (= on text columns is delegable); _realDups
+// strips the record's own ID so resubmitting a request never flags itself.
+// If either value is blank (e.g. PreDevelop only requires Preparer) the
+// guard skips — blanks are the field check's job, not the dup check's.
+/*
+Set(vValidateBasicInfo, false);
+Set(vValidateBasicInfo, true);
+
+With(
+    {
+        vMissing: Concat(
+            Filter(
+                If(vReqProgressCategory = "PreDevelop",
+                    [
+                        {name: "Preparer", isMissing: IsBlank(cbx_preparer.Selected.Mail)}
+                    ],
+                    [
+                        {name: "Department", isMissing: IsBlank(cbx_department.Selected.Value)},
+                        {name: "Department Approver", isMissing: IsBlank(cbx_departmentApprover.Selected.GPUserEmail)},
+                        {name: "Due Date", isMissing: IsBlank(dp_dueDate.SelectedDate)},
+                        {name: "Invoice Amount", isMissing: IsBlank(num_invoiceAmount.Value)},
+                        {name: "Invoice Date", isMissing: IsBlank(dp_invoiceDate.SelectedDate)},
+                        {name: "Invoice Number", isMissing: IsBlank(txt_invoiceNumber.Text)},
+                        {name: "Invoice Subtotal", isMissing: IsBlank(num_invoiceSubtotal.Value)},
+                        {name: "Invoice Tax", isMissing: IsBlank(num_invoiceTax.Value)},
+                        {name: "Vendor Name", isMissing: IsBlank(cbx_vendorName.Selected.VendorName)},
+                        
+                        // Conditional rule: a reason is only required when PO Exemption toggle is on.
+                        {name: "PO Exemption Reason", isMissing: tog_poExemption.Checked && IsBlank(cbx_poExemptionReason.Selected.Value)}
+                    ]
+                ),
+                isMissing
+            ),
+            name,
+            ", "
+        )
+    },
+    If(
+        Not(IsBlank(vMissing)),
+        Notify("Please complete the following required field(s): " & vMissing, NotificationType.Error),
+
+        With(
+            {
+                _vendorCode: Coalesce(cbx_vendorName.Selected.VendorCode, vSelectedRequest.VendorCode),
+                _invoiceNum: txt_invoiceNumber.Text
+            },
+            With(
+                {
+                    _dups: Filter(APIS_SPO_List_Requests,
+                        'Vendor Code' = _vendorCode && 'Invoice Number' = _invoiceNum
+                    )
+                },
+                With(
+                    {
+                        _realDups: If(vIsNew || IsBlank(vSelectedRequest),
+                            _dups,
+                            Filter(_dups, ID <> vSelectedRequest.ID)
+                        )
+                    },
+                    If(
+                        !IsBlank(_vendorCode) && !IsBlank(_invoiceNum) && !IsEmpty(_realDups),
+
+                        // Duplicate found: stop before the confirmation popup.
+                        Notify(
+                            $"Invoice {_invoiceNum} already has a request for this vendor ({First(_realDups).RequestNum}).",
+                            NotificationType.Error
+                        ),
+
+                        // GOOD TO SUBMIT: stage the routing vars and ask to confirm.
+                        Concurrent(
+                            Set(vShowCtrConfirmation, true),
+                            Set(vPopupMessage, "Are you sure you want to submit this request ?"),
+                            Set(vPopupType, "Natural"),
+
+                            Set(vAction, "Requested approval"),
+                            If(vSelectedRequest.Status = "Unassigned",
+                                Set(vNextStage, "Draft");
+                                Set(vNextApproverName,  cbx_preparer.Selected.DisplayName);
+                                Set(vNextApproverEmail, cbx_preparer.Selected.Mail),
+
+                                Set(vNextStage, "Department Approval");
+                                Set(vNextApproverName,  cbx_departmentApprover.Selected.GPUserName);
+                                Set(vNextApproverEmail, cbx_departmentApprover.Selected.GPUserEmail)
+                            ),
+                            Set(vDeptApproverName,  cbx_departmentApprover.Selected.GPUserName),
+                            Set(vDeptApproverEmail, cbx_departmentApprover.Selected.GPUserEmail)
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+*/
+
+// ---- APPROVE button (generic — works at every stage) -------------------------
+// Next stage is derived from the active template (see APIS/approvalTemplates):
+// find the current stage's sort, advance to sort + 1. One Approve button serves
+// Department Approval -> AP Approval -> Treasurer Approval -> Approved without
+// any hardcoded stage names; adding a stage to the template needs no button edits.
+// The Coalesce guard keeps the current status if there is no next stage (already
+// at the end, or Status is off-template like "Rejected") — though the Approve
+// button's Visible should already hide it in those states.
+// Routing vars stay blank => Current Approver columns get the stage name
+// (stage-based routing). Dept Approver vars stay blank => record keeps its
+// stored dept approver.
+/*
+Set(vAction, "Approved");
+Set(vNextStage,
+    With(
+        {_currentSort: LookUp(colActiveTemplate, stage = vSelectedRequest.Status, sort)},
+        Coalesce(
+            LookUp(colActiveTemplate, sort = _currentSort + 1, stage),
+            vSelectedRequest.Status
+        )
+    )
+);
+Select(btn_invisSave)
+*/
+
+// ---- REJECT button -----------------------------------------------------------
+// Returns the request to its creator (progress bar maps Rejected to Draft).
+// vClearDeptApprover wipes the Dept Approver fields so the resubmission starts
+// with a clean approver assignment.
+/*
+Set(vAction, "Rejected");
+Set(vNextStage, "Rejected");
+Set(vNextApproverName,  vSelectedRequest.CreatedBy);
+Set(vNextApproverEmail, vSelectedRequest.CreatedByEmail);
+Set(vClearDeptApprover, true);
+Select(btn_invisSave)
+*/
+
+// ---- REASSIGN button ---------------------------------------------------------
+// Stays at the current stage; both routing and dept approver move to the new person.
+/*
+Set(vAction, "Reassigned");
+Set(vNextStage, vSelectedRequest.Status);
+Set(vNextApproverName,  cbx_reassign.Selected.GPUserName);
+Set(vNextApproverEmail, cbx_reassign.Selected.GPUserEmail);
+Set(vDeptApproverName,  cbx_reassign.Selected.GPUserName);
+Set(vDeptApproverEmail, cbx_reassign.Selected.GPUserEmail);
+Select(btn_invisSave)
+*/

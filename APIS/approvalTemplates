@@ -1,0 +1,25 @@
+// App.Formulas — approval workflow stage templates.
+// The progress bar (see APIS/readOnlyForm) computes the line fill from
+// sort position and row count, so adding/removing a stage only requires
+// editing rows here — no percentages to maintain.
+//
+// "Rejected" is intentionally NOT a stage: rejecting returns the request
+// to the creator, so the progress bar maps Rejected to the Draft position
+// and flags the node red. That mapping lives in readOnlyForm, not here.
+
+nfApprovalTemplateAdmin = Table(
+    {sort: 0, category: "Develop",  stage: "Unassigned"},
+    {sort: 1, category: "Develop",  stage: "Draft"},
+    {sort: 2, category: "Progress", stage: "Department Approval"},
+    {sort: 3, category: "Progress", stage: "AP Approval"},
+    {sort: 4, category: "Progress", stage: "Treasurer Approval"},
+    {sort: 5, category: "Complete", stage: "Approved"}
+);
+
+nfApprovalTemplate = Table(
+    {sort: 0, category: "Develop",  stage: "Draft"},
+    {sort: 1, category: "Progress", stage: "Department Approval"},
+    {sort: 2, category: "Progress", stage: "AP Approval"},
+    {sort: 3, category: "Progress", stage: "Treasurer Approval"},
+    {sort: 4, category: "Complete", stage: "Approved"}
+);

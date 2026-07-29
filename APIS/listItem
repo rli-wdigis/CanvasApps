@@ -1,0 +1,140 @@
+$"
+<table style='table-layout: fixed; width: 100%; border-collapse: collapse; margin: 0; padding: 0; font-family: Segoe UI, sans-serif; background: {If(ThisItem.IsSelected, "#f1f5f9", "#ffffff")}; border-bottom: 1px solid #e2e8f0;'>
+<colgroup>
+    <!-- C1:  Request ID        --><col style='width: 7%;'>
+    <!-- C2:  Status            --><col style='width: 5%;'>
+    <!-- C3:  PO Type           --><col style='width: 6%;'>
+    <!-- C4:  Department        --><col style='width: 7%;'>
+    <!-- C5:  Invoice Number    --><col style='width: 8%;'>
+    <!-- C6:  Invoice Amount    --><col style='width: 5%;'>
+    <!-- C7:  Vendor Name       --><col style='width: 12%;'>
+    <!-- C8:  Vendor Code       --><col style='width: 6%;'>
+    <!-- C9:  PO Number         --><col style='width: 7%;'>
+    <!-- C10: Total PO Value    --><col style='width: 7%;'>
+    <!-- C11: Created By        --><col style='width: 6%;'>
+    <!-- C12: Created On        --><col style='width: 5%;'>
+    <!-- C13: Modified By       --><col style='width: 6%;'>
+    <!-- C14: Modified On       --><col style='width: 5%;'>
+    <!-- C15: Creation Method   --><col style='width: 4%;'>
+    <!-- C16: Vadim Sync Status --><col style='width: 5%;'>
+</colgroup>
+<tr style='cursor: pointer;'>
+  <!-- R1: Request ID -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: {nfPrimaryColorText}; font-weight: 600; position: relative;'>
+    {ThisItem.RequestNum}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R2: Status -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; position: relative;'>
+    <span style='display: inline-block; white-space: nowrap; padding: 6px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; background: {Switch(ThisItem.Status,
+      "Draft", "#f1f5f9",
+      "Pending Approval", "#fef3c7",
+      "Approved", "#d1fae5",
+      "Rejected", "#fee2e2",
+      "Cancelled", "#f3f4f6",
+      "#f1f5f9")}; color: {Switch(ThisItem.Status,
+      "Draft", "#64748b",
+      "Pending Approval", "#d97706",
+      "Approved", "#059669",
+      "Rejected", "#dc2626",
+      "Cancelled", "#6b7280",
+      "#64748b")};'>{ThisItem.Status}</span>
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R3: PO Type -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.POType}'>
+    {ThisItem.POType}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R4: Department -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.Department}'>
+    {ThisItem.Department}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R5: Invoice Number -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.InvoiceNumber}'>
+    {ThisItem.InvoiceNumber}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R6: Invoice Amount -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 600; position: relative;'>
+    {Text(ThisItem.InvoiceAmount, "[$-en-US]$#,##0.00")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R7: Vendor Name -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.VendorName}'>
+    {ThisItem.VendorName}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R8: Vendor Code -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.VendorCode}'>
+    {ThisItem.VendorCode}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R9: PO Number -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.PONumber}'>
+    {ThisItem.PONumber}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R10: Total PO Value -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #0f172a; font-weight: 600; position: relative;'>
+    {Text(ThisItem.TotalPOValue, "[$-en-US]$#,##0.00")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R11: Created By -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.CreatedBy}'>
+    {If(!IsBlank(ThisItem.CreatedBy), ThisItem.CreatedBy, "-")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R12: Created On -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; position: relative;'>
+    {Text(ThisItem.Created, "mm/dd/yy")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R13: Modified By -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative;' title='{ThisItem.ModifiedBy}'>
+    {If(!IsBlank(ThisItem.ModifiedBy), ThisItem.ModifiedBy, "-")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R14: Modified On -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; position: relative;'>
+    {Text(ThisItem.Modified, "mm/dd/yy")}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+  <!-- R15: Creation Method -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; color: #64748b; position: relative;'>
+    {ThisItem.CreationMethod}
+    <div style='position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: #e2e8f0;'></div>
+  </td>
+
+
+  <!-- R16: Vadim Sync Status (no divider on last column) -->
+  <td style='padding: 10px 6px; vertical-align: middle; text-align: center; font-size: 11px; position: relative;'>
+    <span style='display: inline-block; white-space: nowrap; padding: 6px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; background: {Switch(ThisItem.SyncStatus,
+      "Synced", "#d1fae5",
+      "Pending", "#fef3c7",
+      "Failed", "#fee2e2",
+      "#f1f5f9")}; color: {Switch(ThisItem.SyncStatus,
+      "Synced", "#059669",
+      "Pending", "#d97706",
+      "Failed", "#dc2626",
+      "#64748b")};'>{If(!IsBlank(ThisItem.SyncStatus), ThisItem.SyncStatus, "-")}</span>
+  </td>
+
+</tr>
+</table>
+"

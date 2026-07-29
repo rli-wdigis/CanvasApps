@@ -1,0 +1,72 @@
+// Bar-only approval progress train — compact variant of the train in APIS/readOnlyForm.
+// Templates come from APIS/approvalTemplates (no progressLinePct column; the fill
+// width is computed from sort position and stage count).
+// "Rejected" displays at the Draft position with the node flagged red; any other
+// unknown status falls back to a full red bar with ✕ at the end.
+With(
+    {
+        _activeTemplate: colActiveTemplate,
+        // Rejected is not a train stop: it returns the request to the creator,
+        // so it displays at the Draft position (flagged red below).
+        _isRejected: vSelectedRequest.Status = "Rejected",
+        _effectiveStatus: If(vSelectedRequest.Status = "Rejected", "Draft", vSelectedRequest.Status)
+    },
+    With(
+        {
+            _stageCount: CountRows(_activeTemplate),
+            _maxSort: Max(_activeTemplate, sort),
+            _lookupSort: LookUp(
+                _activeTemplate,
+                stage = _effectiveStatus,
+                sort
+            )
+        },
+        With(
+            {
+                _isOffTemplate: !IsBlank(_effectiveStatus) && IsBlank(_lookupSort)
+            },
+            With(
+                {
+                    _currentSort: Coalesce(_lookupSort, If(_isOffTemplate, _maxSort, -1)),
+                    _activeColor: If(_isOffTemplate, "#dc2626", nfPrimaryColorText),
+                    _activeText: If(_isOffTemplate, "#dc2626", nfPrimaryColorText),
+                    _inactiveColor: "#e0e0e0",
+                    _inactiveText: "#999"
+                },
+                With(
+                    {
+                        _progressLinePct: If(
+                            _isOffTemplate, 100,
+                            If(_currentSort < 0, 0, Round((_currentSort + 0.5) / _stageCount * 100, 2))
+                        )
+                    },
+$"<div style='width: 100%; padding: 10px 20px; font-family: Arial, sans-serif;'>
+    <div style='position: relative;'>
+        <div style='display: flex; position: relative;'>
+            <!-- Background Line -->
+            <div style='position: absolute; top: 11px; left: 0; right: 0; height: 3px; background-color: {_inactiveColor}; z-index: 1;'></div>
+
+            <!-- Progress Line -->
+            <div style='position: absolute; top: 11px; left: 0; height: 3px; background-color: {_activeColor}; z-index: 2; width: {_progressLinePct}%; transition: width 0.4s ease;'></div>
+
+            {Concat(
+                SortByColumns(_activeTemplate, "sort"),
+                $"<div style='flex: 1; display: flex; flex-direction: column; align-items: center; position: relative;'>
+                    <div style='width: 24px; height: 24px; border-radius: 50%;
+                         background-color: {If(_isRejected && sort = _currentSort, "#dc2626", If(sort <= _currentSort, _activeColor, _inactiveColor))};
+                         display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; position: relative; z-index: 10;'>
+                        {If(_isRejected && sort = _currentSort, "✕", If(_isOffTemplate && sort = _maxSort, "✕", If(sort < _currentSort, "✓", Text(sort + 1))))}
+                    </div>
+                    <div style='margin-top: 8px; font-size: 11px;
+                         color: {If(_isRejected && sort = _currentSort, "#dc2626", If(sort <= _currentSort, _activeText, _inactiveText))};
+                         text-align: center; white-space: nowrap;'>{If(_isRejected && sort = _currentSort, "Rejected", If(_isOffTemplate && sort = _maxSort, Upper(vSelectedRequest.Status), stage))}</div>
+                </div>"
+            )}
+        </div>
+    </div>
+</div>"
+                )
+            )
+        )
+    )
+)

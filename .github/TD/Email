@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Copilot Studio Capacity Request</title>
+  <!--
+    TD Bank branded email template — Copilot Studio Capacity Request notification
+    Built for Power Automate "Send an email (V2)" — table-based layout, all styles
+    inline, so it renders correctly in Outlook desktop, Outlook web, and mobile.
+
+    HOW TO USE:
+    1. Replace every {{Placeholder}} with dynamic content from your form/Dataverse trigger.
+    2. Replace LOGO_URL_HERE with a hosted URL to the official TD Bank white logo.
+    3. Replace APPROVE_LINK_HERE with the link to your approval item / admin app.
+
+    TD Bank brand color used: Green #12412a (with neutral grays/whites as accents)
+    Copilot accent gradient (aurora): #2AA7EE > #4E8CF7 > #7A6BF5 > #A45BE8 > #CC52CF > #EE5FA0
+    Gradient bars are built from solid-color table cells so they render in Outlook desktop,
+    which strips CSS linear-gradient. Chips use a solid purple fallback behind the gradient.
+  -->
+</head>
+<body style="margin:0; padding:0; background-color:#f2f3f5; font-family:Calibri, Arial, sans-serif;">
+
+  <!-- Preheader (hidden preview text in inbox) -->
+  <div style="display:none; font-size:1px; color:#f2f3f5; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden;">
+    New Copilot Studio capacity request from {{RequesterName}} — {{AgentName}} ({{Environment}})
+  </div>
+
+  <!-- Outer wrapper -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f2f3f5;">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+
+        <!-- Email card -->
+        <table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:640px; max-width:100%; background-color:#ffffff; border-radius:8px; overflow:hidden; border:1px solid #d0d3d4;">
+
+          <!-- ===== HEADER: TD Green banner ===== -->
+          <tr>
+            <td style="background-color:#12412a; padding:20px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="left" style="vertical-align:middle;">
+                    <img src="LOGO_URL_HERE" alt="TD Bank" height="36" style="height:36px; width:auto; display:block; border:0;">
+                  </td>
+                  <td align="right" style="vertical-align:middle; color:#cfe0d3; font-family:Calibri, Arial, sans-serif; font-size:13px; letter-spacing:0.5px;">
+                    EMPLOYEE ENABLEMENT | POWER PLATFORM
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ===== Accent bar: Copilot aurora gradient (Outlook-safe segmented cells) ===== -->
+          <tr>
+            <td style="padding:0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="16.6%" style="background-color:#2AA7EE; height:4px; line-height:4px; font-size:0;">&nbsp;</td>
+                  <td width="16.6%" style="background-color:#4E8CF7; height:4px; line-height:4px; font-size:0;">&nbsp;</td>
+                  <td width="16.6%" style="background-color:#7A6BF5; height:4px; line-height:4px; font-size:0;">&nbsp;</td>
+                  <td width="16.6%" style="background-color:#A45BE8; height:4px; line-height:4px; font-size:0;">&nbsp;</td>
+                  <td width="16.6%" style="background-color:#CC52CF; height:4px; line-height:4px; font-size:0;">&nbsp;</td>
+                  <td width="17%" style="background-color:#EE5FA0; height:4px; line-height:4px; font-size:0;">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ===== TITLE BLOCK ===== -->
+          <tr>
+            <td style="padding:28px 32px 8px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td>
+                    <!-- Status badge -->
+                    <span style="display:inline-block; background-color:#e6a817; color:#ffffff; font-family:Calibri, Arial, sans-serif; font-size:12px; font-weight:bold; letter-spacing:1px; padding:4px 12px; border-radius:12px;">NEW REQUEST</span>
+                    <!-- Copilot chip (gradient with solid fallback for Outlook) -->
+                    <span style="display:inline-block; background-color:#7A6BF5; background-image:linear-gradient(90deg, #4E8CF7, #A45BE8, #EE5FA0); color:#ffffff; font-family:Calibri, Arial, sans-serif; font-size:12px; font-weight:bold; letter-spacing:1px; padding:4px 12px; border-radius:12px; margin-left:6px;">&#10024; COPILOT STUDIO</span>
+                  </td>
+                  <td align="right" style="font-family:Calibri, Arial, sans-serif; font-size:13px; color:#6b6d70;">
+                    Ref: {{RequestID}}
+                  </td>
+                </tr>
+              </table>
+              <h1 style="margin:16px 0 4px 0; font-family:Calibri, Arial, sans-serif; font-size:24px; font-weight:bold; color:#12412a;">
+                Copilot Studio Capacity Request
+              </h1>
+              <p style="margin:0 0 8px 0; font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; line-height:1.6;">
+                Submitted by <strong>{{RequesterName}}</strong> on {{SubmittedDate}}
+              </p>
+              <p style="margin:0 0 8px 0; font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; line-height:1.6;">
+                Thanks for submitting a Power Platform request. Request <strong>{{RequestID}}</strong> is ready for technical review by the Platform Team.
+              </p>
+              <p style="margin:0 0 8px 0; font-family:Calibri, Arial, sans-serif; font-size:13px; color:#6b6d70; line-height:1.6;">
+                Note: there is a 10-business-day SLA for completion of this request.
+              </p>
+            </td>
+          </tr>
+
+          <!-- ===== REQUEST DETAILS TABLE ===== -->
+          <tr>
+            <td style="padding:16px 32px 8px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                <tr>
+                  <td colspan="2" style="background-color:#12412a; color:#ffffff; font-family:Calibri, Arial, sans-serif; font-size:14px; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70;">
+                    Request Details
+                  </td>
+                </tr>
+                <tr>
+                  <td width="38%" style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">Agent Name</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">{{AgentName}}</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#eef2ee;">Environment</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#eef2ee;">{{Environment}}</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">Business Owner</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">{{BusinessOwner}}</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#eef2ee;">Department</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#eef2ee;">{{Department}}</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">Cost Center</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">{{CostCenter}}</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#eef2ee;">Audience</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#eef2ee;">{{Audience}}</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">Generative / Agentic Features</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">{{GenerativeFeatures}}</td>
+                </tr>
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#eef2ee;">Estimated Credits / Month</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#eef2ee;"><strong>{{EstimatedCredits}}</strong></td>
+                </tr>
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#12412a; font-weight:bold; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">Start Date / Duration</td>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; padding:10px 14px; border:1px solid #6b6d70; background-color:#ffffff;">{{StartDateDuration}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ===== BUSINESS JUSTIFICATION CALLOUT ===== -->
+          <tr>
+            <td style="padding:16px 32px 8px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="border-left:4px solid #3c7a52; background-color:#eef4ee; padding:14px 18px;">
+                    <p style="margin:0 0 6px 0; font-family:Calibri, Arial, sans-serif; font-size:14px; font-weight:bold; color:#12412a;">Business Justification</p>
+                    <p style="margin:0; font-family:Calibri, Arial, sans-serif; font-size:14px; color:#333333; line-height:1.6;">{{BusinessJustification}}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ===== CTA BUTTON ===== -->
+          <tr>
+            <td align="center" style="padding:24px 32px 8px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="background-color:#12412a; border-radius:6px;">
+                    <a href="APPROVE_LINK_HERE" target="_blank" style="display:inline-block; padding:12px 36px; font-family:Calibri, Arial, sans-serif; font-size:15px; font-weight:bold; color:#ffffff; text-decoration:none;">
+                      Review Request
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:12px 0 0 0; font-family:Calibri, Arial, sans-serif; font-size:12px; color:#6b6d70;">
+                Please review within 10 business days. Capacity is allocated once approved.
+              </p>
+            </td>
+          </tr>
+
+          <!-- ===== NEXT STEPS ===== -->
+          <tr>
+            <td style="padding:16px 32px 24px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="border-top:1px solid #d0d3d4; padding-top:16px;">
+                    <p style="margin:0 0 6px 0; font-family:Calibri, Arial, sans-serif; font-size:14px; font-weight:bold; color:#3c7a52;">&#10024; What happens next</p>
+                    <p style="margin:0; font-family:Calibri, Arial, sans-serif; font-size:13px; color:#333333; line-height:1.7;">
+                      1. The Employee Enablement | Power Platform team reviews the request and sizing estimate.<br>
+                      2. If approved, credits are allocated to the target environment in the Power Platform admin center.<br>
+                      3. The requester and business owner receive a confirmation email with the allocation details and review date.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ===== Copilot aurora gradient bar above footer ===== -->
+          <tr>
+            <td style="padding:0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="16.6%" style="background-color:#2AA7EE; height:3px; line-height:3px; font-size:0;">&nbsp;</td>
+                  <td width="16.6%" style="background-color:#4E8CF7; height:3px; line-height:3px; font-size:0;">&nbsp;</td>
+                  <td width="16.6%" style="background-color:#7A6BF5; height:3px; line-height:3px; font-size:0;">&nbsp;</td>
+                  <td width="16.6%" style="background-color:#A45BE8; height:3px; line-height:3px; font-size:0;">&nbsp;</td>
+                  <td width="16.6%" style="background-color:#CC52CF; height:3px; line-height:3px; font-size:0;">&nbsp;</td>
+                  <td width="17%" style="background-color:#EE5FA0; height:3px; line-height:3px; font-size:0;">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ===== FOOTER ===== -->
+          <tr>
+            <td style="background-color:#12412a; padding:16px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="font-family:Calibri, Arial, sans-serif; font-size:12px; color:#cfe0d3; line-height:1.6;">
+                    Employee Enablement | Power Platform &nbsp;|&nbsp; © TD Bank<br>
+                    <span style="display:inline-block; margin-top:4px; font-size:12px; color:#cfe0d3;">
+                      &#10024; Powered by Microsoft Copilot Studio
+                    </span><br>
+                    <span style="display:inline-block; margin-top:6px; font-weight:bold; font-size:13px; color:#ffffff; letter-spacing:0.3px;">
+                      THIS IS AN AUTOMATED MESSAGE. DO NOT REPLY TO THIS MESSAGE.
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+        <!-- /Email card -->
+
+      </td>
+    </tr>
+  </table>
+
+  <!-- ============================================================
+       OPTIONAL: Power Platform product logo strip (commented out)
+
+       To use: paste the <tr>...</tr> block below INSIDE the email
+       card table (e.g. just above the aurora gradient bar / footer),
+       then replace each *_LOGO_URL_HERE with a hosted PNG of the
+       official Microsoft product icon (48x48 or 96x96 recommended).
+
+       Official product icon colors, for reference:
+         Power Apps       - purple  #742774
+         Power Automate   - blue    #0066FF
+         Dataverse        - green   #088142
+         Copilot Studio   - aurora gradient (blue/purple/pink)
+
+  <tr>
+    <td align="center" style="padding:16px 32px; border-top:1px solid #d0d3d4;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td align="center" style="padding:0 14px;">
+            <img src="POWERAPPS_LOGO_URL_HERE" alt="Power Apps" width="32" height="32" style="display:block; border:0; margin:0 auto 4px auto;">
+            <span style="font-family:Calibri, Arial, sans-serif; font-size:11px; color:#6b6d70;">Power Apps</span>
+          </td>
+          <td align="center" style="padding:0 14px;">
+            <img src="POWERAUTOMATE_LOGO_URL_HERE" alt="Power Automate" width="32" height="32" style="display:block; border:0; margin:0 auto 4px auto;">
+            <span style="font-family:Calibri, Arial, sans-serif; font-size:11px; color:#6b6d70;">Power Automate</span>
+          </td>
+          <td align="center" style="padding:0 14px;">
+            <img src="DATAVERSE_LOGO_URL_HERE" alt="Dataverse" width="32" height="32" style="display:block; border:0; margin:0 auto 4px auto;">
+            <span style="font-family:Calibri, Arial, sans-serif; font-size:11px; color:#6b6d70;">Dataverse</span>
+          </td>
+          <td align="center" style="padding:0 14px;">
+            <img src="COPILOTSTUDIO_LOGO_URL_HERE" alt="Copilot Studio" width="32" height="32" style="display:block; border:0; margin:0 auto 4px auto;">
+            <span style="font-family:Calibri, Arial, sans-serif; font-size:11px; color:#6b6d70;">Copilot Studio</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  ============================================================ -->
+
+</body>
+</html>
