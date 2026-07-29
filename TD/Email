@@ -9,7 +9,7 @@
     TD Bank branded email template — Copilot Studio Capacity Request notification
     Built for Power Automate "Send an email (V2)" — table-based layout, all styles
     inline, so it renders correctly in Outlook desktop, Outlook web, and mobile.
-
+    2026-07-28
     HOW TO USE:
     1. Replace every {{Placeholder}} with dynamic content from your form/Dataverse trigger.
     2. Replace LOGO_URL_HERE with a hosted URL to the official TD Bank white logo.
