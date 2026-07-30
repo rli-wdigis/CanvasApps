@@ -1,0 +1,4 @@
+Add-PowerAppsAccount
+Get-AdminPowerAppConnector -EnvironmentName "<any-environment-id>" |
+  Select-Object DisplayName, @{n='Id';e={"/providers/Microsoft.PowerApps/apis/" + $_.ConnectorName}} |
+  Sort-Object DisplayName | Format-Table -Auto
