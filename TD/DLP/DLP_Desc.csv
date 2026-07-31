@@ -1,0 +1,55 @@
+DisplayName	Classification	Description
+Microsoft Dataverse	Business	Read and write data in Dataverse tables, the primary data platform for Power Apps and Dynamics 365.
+Office 365 Outlook	Business	Send, receive, and manage email and calendar events through Outlook and Exchange Online.
+Power Apps for Makers	Business	Manage Power Apps resources such as apps, connections, and permissions as an app maker.
+Power Platform for Admins V2	Business	Administer Power Platform environments, DLP policies, and governance settings (modern V2 API).
+SharePoint	Business	Work with SharePoint lists, libraries, files, and items across sites.
+OneDrive for Business	Business	Create, read, and manage files stored in OneDrive for Business.
+SQL Server	Business	Connect to SQL Server or Azure SQL Database to query and update relational data.
+Microsoft MCP Servers	Business	Connect to Microsoft-hosted Model Context Protocol (MCP) servers for AI agent integrations.
+Azure Application Insights	Business	Query telemetry and monitoring data from Azure Application Insights.
+Approvals	Business	Create and manage approval requests and responses in Power Automate.
+Microsoft Entra ID	Business	Manage users, groups, and directory objects in Microsoft Entra ID (formerly Azure AD).
+Azure AI Foundry Agent Service	Business	Build and call AI agents hosted in Azure AI Foundry.
+Azure AI Foundry Inference	Business	Run model inference against models deployed in Azure AI Foundry.
+Azure AI Model Inference	Business	Invoke Azure-hosted AI models for chat, completion, and embedding tasks.
+Azure AI Search	Business	Query and manage search indexes in Azure AI Search (formerly Cognitive Search).
+Azure Blob Storage	Business	Read, upload, and manage files stored in Azure Blob Storage containers.
+Defender for Cloud Apps	Business	Access alerts and activity data from Microsoft Defender for Cloud Apps.
+Azure Cognitive Service for Language	Business	Analyze text for sentiment, key phrases, entities, and language detection.
+Microsoft Dataverse (legacy)	Business	Legacy Dataverse connector; superseded by the current Microsoft Dataverse connector.
+Excel Online (Business)	Business	Read and update data in Excel workbooks stored in OneDrive or SharePoint.
+Power Automate Management	Business	Create, edit, and manage Power Automate flows programmatically.
+Notifications	Business	Send mobile and email notifications from flows to the Power Automate app.
+M365 Copilot	Business	Integrate with Microsoft 365 Copilot capabilities and data.
+M365 Copilot Actions	Business	Trigger and run automation actions through Microsoft 365 Copilot.
+M365 Copilot (V2)	Business	Modern V2 connector for Microsoft 365 Copilot integrations.
+Microsoft Copilot Studio	Business	Build and manage custom copilots and conversational agents in Copilot Studio.
+Power Automate for Admins	Business	Administer Power Automate flows across the tenant, including managing other users' flows.
+Office 365 Groups	Business	Create and manage Microsoft 365 Groups and their memberships.
+Office 365 Groups Mail	Business	Send and read email conversations in Microsoft 365 Groups shared mailboxes.
+Office 365 Users	Business	Look up user profiles, managers, and direct reports from the organization directory.
+OneNote (Business)	Business	Create and manage pages, sections, and notebooks in OneNote for work accounts.
+Outlook Tasks	Business	Create and manage tasks stored in Outlook (legacy tasks service).
+Planner	Business	Create and manage plans, buckets, and tasks in Microsoft Planner.
+Power Apps for Admins	Business	Administer Power Apps across the tenant, including apps, permissions, and connections.
+Power Apps Notification	Business	Send push notifications to Power Apps mobile users.
+Power Apps Notification V2	Business	Modern V2 connector for sending push notifications to Power Apps mobile users.
+Power BI	Business	Trigger flows from Power BI alerts and work with datasets, reports, and workspaces.
+Power Platform for Admins	Business	Administer Power Platform environments, DLP policies, and admin resources (legacy API).
+Azure SQL Data Warehouse	Business	Query and manage data in Azure Synapse Analytics (formerly SQL Data Warehouse).
+Microsoft Teams	Business	Post messages, manage channels and teams, and respond to Teams events.
+Microsoft To-Do (Business)	Business	Create and manage personal tasks and lists in Microsoft To Do.
+Viva Engage	Business	Post and read messages in Viva Engage (formerly Yammer) communities.
+When a Teams webhook request is received	Business	Trigger flows from incoming webhook requests posted to Microsoft Teams.
+Skills with Copilot Studio	Business	Extend Copilot Studio agents with skills built in Bot Framework.
+Microsoft Teams + M365 Channel in Copilot Studio	Business	Publish Copilot Studio agents to Microsoft Teams and Microsoft 365 channels.
+Direct Line channels in Copilot Studio	Business	Connect Copilot Studio agents to custom apps and websites via Direct Line channels.
+Knowledge source with SharePoint and OneDrive in Copilot Studio	Business	Ground Copilot Studio agents on content from SharePoint and OneDrive.
+Knowledge source with documents in Copilot Studio	Business	Ground Copilot Studio agents on uploaded documents as a knowledge source.
+Application Insights in Copilot Studio	Business	Send Copilot Studio agent telemetry to Azure Application Insights.
+SharePoint channel in Copilot Studio	Business	Publish Copilot Studio agents to SharePoint sites as a channel.
+Microsoft Kaizala	General	Send messages and actions through Microsoft Kaizala (retired mobile messaging service).
+Dynamics 365 Customer Voice	General	Create and manage surveys and responses in Dynamics 365 Customer Voice (formerly Forms Pro).
+Shifts for Microsoft Teams	General	Manage shift schedules, swaps, and time-off requests in Teams Shifts.
+Skype for Business Online	General	Legacy connector for Skype for Business Online messaging and presence (service retired).
